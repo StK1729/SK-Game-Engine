@@ -58,6 +58,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SKGE_PLATFORM_WINDOWS;SKGE_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)SK-Gaming-Engine\vendor\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,6 +73,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SKGE_PLATFORM_WINDOWS;SKGE_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)SK-Gaming-Engine\vendor\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,9 +83,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\SK-Gaming-Engine\Log.cpp" />
     <ClCompile Include="src\SK-Gaming-Engine\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\SK-Gaming-Engine\Log.h" />
     <ClInclude Include="src\SK-Gaming-Engine\Application.h" />
     <ClInclude Include="src\SK-Gaming-Engine\Core.h" />
     <ClInclude Include="src\SK-Gaming-Engine\EntryPoint.h" />

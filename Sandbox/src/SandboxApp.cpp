@@ -2,7 +2,7 @@
 #include <memory>
 
 
-class Sandbox : public  SK_Gaming_Engine::Application
+class Sandbox : public SK_Gaming_Engine::Application
 {
 public:
 	Sandbox() 
