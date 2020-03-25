@@ -4,6 +4,9 @@
     <Filter Include="SK-Gaming-Engine">
       <UniqueIdentifier>{866D8540-7266-A492-9B98-891787F0839E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SK-Gaming-Engine\Events">
+      <UniqueIdentifier>{c868a11e-35e0-450e-8e6e-249c37105fc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SK-Gaming-Engine\Application.h">
@@ -19,6 +22,18 @@
       <Filter>SK-Gaming-Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\SKGE.h" />
+    <ClInclude Include="src\SK-Gaming-Engine\Events\Event.h">
+      <Filter>SK-Gaming-Engine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SK-Gaming-Engine\Events\ApplicationEvents.h">
+      <Filter>SK-Gaming-Engine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SK-Gaming-Engine\Events\KeyEvents.h">
+      <Filter>SK-Gaming-Engine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SK-Gaming-Engine\Events\MouseEvents.h">
+      <Filter>SK-Gaming-Engine\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SK-Gaming-Engine\Application.cpp">

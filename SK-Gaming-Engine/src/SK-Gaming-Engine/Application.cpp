@@ -1,5 +1,9 @@
 #include "Application.h"
+#include "Log.h";
 #include <iostream>
+#include "Events/Event.h"
+#include "Events/ApplicationEvents.h"
+
 namespace SK_Gaming_Engine {
 
 	Application::Application() 
@@ -13,7 +17,15 @@ namespace SK_Gaming_Engine {
 	}
 	void Application::Run() 
 	{
-		std::cout << "This works" << std::endl;
+		WindowResizeEvent e(1200,720);
+		if (e.IsInCategory(EventCategoryApplication))
+		{
+			SKGE_CORE_TRACE(e);
+		}
+		if (!e.IsInCategory(EventCategoryInput))
+		{
+			SKGE_CORE_TRACE(e);
+		}
 		std::cin.get();
 	}
 }
