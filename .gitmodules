@@ -1,3 +1,6 @@
 [submodule "SK-Gaming-Engine/vendor/spdlog"]
 	path = SK-Gaming-Engine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "SK-Gaming-Engine/vendor/GLFW"]
+	path = SK-Gaming-Engine/vendor/GLFW
+	url = https://github.com/StK1729/glfw

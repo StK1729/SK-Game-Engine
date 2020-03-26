@@ -1,7 +1,6 @@
 #pragma once
+#include "pch.h"
 #include "SK-Gaming-Engine/Core.h"
-#include <string>
-#include <functional>
 
 
 namespace SK_Gaming_Engine

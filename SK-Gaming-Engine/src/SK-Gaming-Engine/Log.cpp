@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Log.h"
 
 namespace SK_Gaming_Engine {
@@ -27,6 +28,7 @@ namespace SK_Gaming_Engine {
 	void Log::LogWarning(std::string& message)
 	{
 		spdlog::warn(message);
+
 	}
 
 	void Log::LogDebug(std::string& message)

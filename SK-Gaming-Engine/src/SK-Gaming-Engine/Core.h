@@ -10,3 +10,11 @@
 #endif
 
 #define BIT(x) ( 1 << x )
+
+#ifdef SKGE_ENABLE_ASSERTS
+	#define SKGE_CORE_ASSERT(x, ...) { if(!(x)) {SKGE_CORE_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define SKGE_CLIENT_ASSERT(x, ...) { if(!(x)) {SKGE_CLIENT_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#else
+	#define SKGE_CORE_ASSERT(x, ...)
+	#define SKGE_CLIENT_ASSERT(x, ...)
+#endif

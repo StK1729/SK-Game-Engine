@@ -9,6 +9,12 @@ workspace "SK-Gaming-Engine"
 	}
 
 	outputdir =  "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+	-- include directories relative to root folder 
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "SK-Gaming-Engine/vendor/GLFW/include"
+	include "SK-Gaming-Engine/vendor/GLFW"
+
 	project "SK-Gaming-Engine"
 	location "SK-Gaming-Engine"
 	kind "SharedLib"
@@ -16,6 +22,9 @@ workspace "SK-Gaming-Engine"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "pch.h"
+	pchsource "SK-Gaming-Engine/src/pch.cpp"
 
 	files 
 	{
@@ -26,7 +35,14 @@ workspace "SK-Gaming-Engine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

@@ -1,14 +1,14 @@
+#include "pch.h"
 #include "Application.h"
-#include "Log.h";
-#include <iostream>
-#include "Events/Event.h"
 #include "Events/ApplicationEvents.h"
+#include "Log.h"
+#include <GLFW/glfw3.h>
 
 namespace SK_Gaming_Engine {
 
 	Application::Application() 
 	{
-
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -17,15 +17,11 @@ namespace SK_Gaming_Engine {
 	}
 	void Application::Run() 
 	{
-		WindowResizeEvent e(1200,720);
-		if (e.IsInCategory(EventCategoryApplication))
+		while (m_Running)
 		{
-			SKGE_CORE_TRACE(e);
+			glClearColor(1, 0, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_Window->OnUpdate();
 		}
-		if (!e.IsInCategory(EventCategoryInput))
-		{
-			SKGE_CORE_TRACE(e);
-		}
-		std::cin.get();
 	}
 }
