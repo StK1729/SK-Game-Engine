@@ -59,7 +59,7 @@ namespace SK_Gaming_Engine
 		{
 			if (m_event.GetEventType() == T::GetStaticType())
 			{
-				m_event.m_handled = func(*(T*)m_event);
+				m_event.m_handled = func(*(T*)&m_event);
 				return true;
 			}
 			return false;
