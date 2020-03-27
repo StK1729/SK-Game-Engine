@@ -157,18 +157,18 @@
     <ClInclude Include="src\SK-Gaming-Engine\Events\KeyEvents.h" />
     <ClInclude Include="src\SK-Gaming-Engine\Events\MouseEvents.h" />
     <ClInclude Include="src\SK-Gaming-Engine\Log.h" />
+    <ClInclude Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\SK-Gaming-Engine\Window.h" />
     <ClInclude Include="src\SKGE.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\SK-Gaming-Engine\Window.h" />
-    <ClInclude Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SK-Gaming-Engine\Application.cpp" />
     <ClCompile Include="src\SK-Gaming-Engine\Log.cpp" />
+    <ClCompile Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

@@ -8,7 +8,10 @@
       <UniqueIdentifier>{AAE67356-161E-BCED-1F28-20118BDEE2E6}</UniqueIdentifier>
     </Filter>
     <Filter Include="SK-Gaming-Engine\Platform">
-      <UniqueIdentifier>{0c6ffc29-0ee3-4227-9025-83f5ba0550b9}</UniqueIdentifier>
+      <UniqueIdentifier>{9A4026DF-0603-5A69-4FB3-E8F5BBB43247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SK-Gaming-Engine\Platform\Windows">
+      <UniqueIdentifier>{D4E44F5A-4053-A5D9-893C-60D9F5E99A75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,12 +39,14 @@
     <ClInclude Include="src\SK-Gaming-Engine\Log.h">
       <Filter>SK-Gaming-Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\SKGE.h" />
-    <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.h">
+      <Filter>SK-Gaming-Engine\Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\SK-Gaming-Engine\Window.h">
       <Filter>SK-Gaming-Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\SKGE.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SK-Gaming-Engine\Application.cpp">
@@ -50,7 +55,9 @@
     <ClCompile Include="src\SK-Gaming-Engine\Log.cpp">
       <Filter>SK-Gaming-Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.cpp">
+      <Filter>SK-Gaming-Engine\Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\SK-Gaming-Engine\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>
