@@ -8,11 +8,11 @@ namespace SK_Gaming_Engine
 	class SKGE_API MouseMovedEvent : public Event
 	{
 	public:
-		MouseMovedEvent(float x, float y) : m_mouseX{ x }, m_mouseY{ y }
+		MouseMovedEvent(double x, double y) : m_mouseX{ x }, m_mouseY{ y }
 		{}
 
-		inline float GetX() { return m_mouseX; }
-		inline float GetY() { return m_mouseY; }
+		inline double GetX() { return m_mouseX; }
+		inline double GetY() { return m_mouseY; }
 
 	std::string ToString() const override
 	{
@@ -25,17 +25,17 @@ namespace SK_Gaming_Engine
 	EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	private:
-		float m_mouseX, m_mouseY;
+		double m_mouseX, m_mouseY;
 	};
 
 	class SKGE_API MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset{ xOffset }, m_YOffset{ yOffset }
+		MouseScrolledEvent(double xOffset, double yOffset) : m_XOffset{ xOffset }, m_YOffset{ yOffset }
 		{}
 
-		inline float GetXOffset() { return m_XOffset; }
-		inline float GetYOffset() { return m_YOffset; }
+		inline double GetXOffset() { return m_XOffset; }
+		inline double GetYOffset() { return m_YOffset; }
 
 		std::string ToString() const override
 		{
@@ -48,7 +48,7 @@ namespace SK_Gaming_Engine
 			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	private:
-		float m_XOffset, m_YOffset;
+		double m_XOffset, m_YOffset;
 	};
 
 	class SKGE_API MouseButtonEvent : public Event

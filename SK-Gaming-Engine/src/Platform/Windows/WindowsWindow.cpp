@@ -4,6 +4,8 @@
 #include "SK-Gaming-Engine/Events/ApplicationEvents.h"
 #include "SK-Gaming-Engine/Events/KeyEvents.h"
 #include "SK-Gaming-Engine/Events/MouseEvents.h"
+#include "glad/glad.h"
+
 
 namespace SK_Gaming_Engine
 {
@@ -39,13 +41,15 @@ namespace SK_Gaming_Engine
 		if (!s_GLWFInitialized)
 		{
 			bool success = glfwInit();
-			SKGE_CORE_ASSERT(success, "Could not initialize GLFW!");
+			SKGE_CORE_ASSERT(success, "Could not initialize GLFW.");
 			glfwSetErrorCallback(GLFWErrorCallbackFunction);
 			s_GLWFInitialized = true;
 		}
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		SKGE_CORE_ASSERT(status, "Failed to initialize glad.")
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

@@ -38,6 +38,7 @@ namespace SK_Gaming_Engine
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
+		virtual bool Handled() { return m_handled; }
 		virtual std::string ToString() const { return GetName(); }
 		inline bool IsInCategory(EventCategory category)
 		{

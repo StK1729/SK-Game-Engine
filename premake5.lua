@@ -13,7 +13,10 @@ workspace "SK-Gaming-Engine"
 	-- include directories relative to root folder 
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "SK-Gaming-Engine/vendor/GLFW/include"
+	IncludeDir["Glad"] = "SK-Gaming-Engine/vendor/Glad/include"
+
 	include "SK-Gaming-Engine/vendor/GLFW"
+	include "SK-Gaming-Engine/vendor/Glad"
 
 	project "SK-Gaming-Engine"
 	location "SK-Gaming-Engine"
@@ -36,12 +39,14 @@ workspace "SK-Gaming-Engine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -53,7 +58,8 @@ workspace "SK-Gaming-Engine"
 	defines
 	{
 		"SKGE_PLATFORM_WINDOWS",
-		"SKGE_BUILD_DLL"
+		"SKGE_BUILD_DLL",
+		"GLFW_INCLUDE_NONE"
 	}
 
 	postbuildcommands
@@ -63,14 +69,17 @@ workspace "SK-Gaming-Engine"
 
 	filter "configurations:Debug"
 		defines "SKGE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "SKGE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "SKGE_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -110,12 +119,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "SKGE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "SKGE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "SKGE_DIST"
+		buildoptions "/MD"
 		optimize "On"
