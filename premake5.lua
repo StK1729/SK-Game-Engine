@@ -14,9 +14,11 @@ workspace "SK-Gaming-Engine"
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "SK-Gaming-Engine/vendor/GLFW/include"
 	IncludeDir["Glad"] = "SK-Gaming-Engine/vendor/Glad/include"
+	IncludeDir["ImGui"] = "SK-Gaming-Engine/vendor/imgui"
 
 	include "SK-Gaming-Engine/vendor/GLFW"
 	include "SK-Gaming-Engine/vendor/Glad"
+	include "SK-Gaming-Engine/vendor/imgui"
 
 	project "SK-Gaming-Engine"
 	location "SK-Gaming-Engine"
@@ -40,14 +42,16 @@ workspace "SK-Gaming-Engine"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
-		"opengl32.lib"
+		"opengl32.lib",
+		"ImGui"
 	}
 
 	filter "system:windows"

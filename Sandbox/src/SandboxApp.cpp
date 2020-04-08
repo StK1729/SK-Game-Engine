@@ -24,7 +24,7 @@ class Sandbox : public SK_Gaming_Engine::Application
 public:
 	Sandbox() 
 	{
-		PushLayer(new ExampleLayer());
+		PushOverlay(new SK_Gaming_Engine::ImGuiLayer());
 	}
 	~Sandbox()
 	{

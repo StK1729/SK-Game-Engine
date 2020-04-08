@@ -8,18 +8,21 @@
 
 namespace SK_Gaming_Engine {
 
-	SKGE_API class Application {
+	class SKGE_API Application {
 	public:
-		SKGE_API Application();
-		SKGE_API virtual ~Application();
-		SKGE_API void Run();
+		Application();
+		virtual ~Application();
+		void Run();
 		void OnEvent(Event& e);
 
-		SKGE_API void PushLayer(Layer* layer);
+		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
+
+		inline Window& GetWindow() { return *m_Window; }
+		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool OnWindowClosed(WindowCloseEvent& e);
-
+		static Application* s_Instance;
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;

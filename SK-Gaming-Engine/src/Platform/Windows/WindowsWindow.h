@@ -15,6 +15,7 @@ namespace SK_Gaming_Engine {
 
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
+		inline GLFWwindow* GetNativeWindow() const override;
 
 		// Window attributes 
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }

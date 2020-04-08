@@ -5,3 +5,8 @@
 	path = SK-Gaming-Engine/vendor/GLFW
 	url = https://github.com/StK1729/glfw
 	ignore = dirty
+[submodule "SK-Gaming-Engine/vendor/imgui"]
+	path = SK-Gaming-Engine/vendor/imgui
+	url = https://github.com/StK1729/imgui.git
+	ignore = dirty
+

@@ -139,6 +139,10 @@ namespace SK_Gaming_Engine
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
+	inline GLFWwindow* WindowsWindow::GetNativeWindow() const
+	{
+		return m_Window;
+	}
 	void WindowsWindow::SetVSync(bool enabled)
 	{
 		if (enabled){
