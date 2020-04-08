@@ -103,7 +103,9 @@ project "Sandbox"
 	includedirs
 	{
 		"SK-Gaming-Engine/vendor/spdlog/include",
-		"SK-Gaming-Engine/src"
+		"SK-Gaming-Engine/src",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
