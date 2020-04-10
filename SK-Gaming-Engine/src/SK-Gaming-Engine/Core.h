@@ -18,3 +18,5 @@
 	#define SKGE_CORE_ASSERT(x, ...)
 	#define SKGE_CLIENT_ASSERT(x, ...)
 #endif
+
+#define SKGE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
