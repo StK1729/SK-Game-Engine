@@ -1,5 +1,6 @@
 workspace "SK-Gaming-Engine"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
