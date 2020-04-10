@@ -17,9 +17,12 @@ workspace "SK-Gaming-Engine"
 	IncludeDir["Glad"] = "SK-Gaming-Engine/vendor/Glad/include"
 	IncludeDir["ImGui"] = "SK-Gaming-Engine/vendor/imgui"
 
-	include "SK-Gaming-Engine/vendor/GLFW"
-	include "SK-Gaming-Engine/vendor/Glad"
-	include "SK-Gaming-Engine/vendor/imgui"
+	group "Dependencies"
+		include "SK-Gaming-Engine/vendor/GLFW"
+		include "SK-Gaming-Engine/vendor/Glad"
+		include "SK-Gaming-Engine/vendor/imgui"
+
+	group ""
 
 	project "SK-Gaming-Engine"
 	location "SK-Gaming-Engine"
@@ -69,7 +72,7 @@ workspace "SK-Gaming-Engine"
 
 	postbuildcommands
 	{
-		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox/")
+		("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 	}
 
 	filter "configurations:Debug"
