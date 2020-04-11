@@ -1,1 +1,1 @@
-# SK-Gaming-Engine
+# SK-Game-Engine
