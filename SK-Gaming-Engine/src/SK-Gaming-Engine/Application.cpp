@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Log.h"
 #include <glad/glad.h>
-
+#include "Input.h"
 namespace SK_Gaming_Engine {
 
 #define BIND_EVENT_FN(x) std::bind(&x , this, std::placeholders::_1)
@@ -56,6 +56,8 @@ namespace SK_Gaming_Engine {
 	
 	void Application::Run() 
 	{
+		auto [x, y] = Input::GetMouseCursorPos();
+		SKGE_CORE_TRACE("{0}, {1}", x, y);
 		while (m_Running)
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
