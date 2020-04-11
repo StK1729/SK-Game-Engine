@@ -2,7 +2,7 @@
 #include <memory>
 
 
-class ExampleLayer : public SK_Gaming_Engine::Layer
+class ExampleLayer : public SK_Game_Engine::Layer
 {
 public:
 	ExampleLayer() : Layer("Example")
@@ -13,18 +13,18 @@ public:
 		SKGE_CLIENT_INFO("ExampleLayer::Update");
 	}
 
-	void OnEvent(SK_Gaming_Engine::Event& event) override 
+	void OnEvent(SK_Game_Engine::Event& event) override 
 	{
 		SKGE_CLIENT_TRACE("{0}", event);
 	}
 };
 
-class Sandbox : public SK_Gaming_Engine::Application
+class Sandbox : public SK_Game_Engine::Application
 {
 public:
 	Sandbox() 
 	{
-		PushOverlay(new SK_Gaming_Engine::ImGuiLayer());
+		PushOverlay(new SK_Game_Engine::ImGuiLayer());
 	}
 	~Sandbox()
 	{
@@ -32,7 +32,7 @@ public:
 	}
 };
 
-SK_Gaming_Engine::Application* SK_Gaming_Engine::CreateApplication()
+SK_Game_Engine::Application* SK_Game_Engine::CreateApplication()
 {
 	return new Sandbox();
 }

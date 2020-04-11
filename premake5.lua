@@ -1,4 +1,4 @@
-workspace "SK-Gaming-Engine"
+workspace "SK-Game-Engine"
 	architecture "x64"
 	startproject "Sandbox"
 
@@ -13,19 +13,19 @@ workspace "SK-Gaming-Engine"
 
 	-- include directories relative to root folder 
 	IncludeDir = {}
-	IncludeDir["GLFW"] = "SK-Gaming-Engine/vendor/GLFW/include"
-	IncludeDir["Glad"] = "SK-Gaming-Engine/vendor/Glad/include"
-	IncludeDir["ImGui"] = "SK-Gaming-Engine/vendor/imgui"
+	IncludeDir["GLFW"] = "SK-Game-Engine/vendor/GLFW/include"
+	IncludeDir["Glad"] = "SK-Game-Engine/vendor/Glad/include"
+	IncludeDir["ImGui"] = "SK-Game-Engine/vendor/imgui"
 
 	group "Dependencies"
-		include "SK-Gaming-Engine/vendor/GLFW"
-		include "SK-Gaming-Engine/vendor/Glad"
-		include "SK-Gaming-Engine/vendor/imgui"
+		include "SK-Game-Engine/vendor/GLFW"
+		include "SK-Game-Engine/vendor/Glad"
+		include "SK-Game-Engine/vendor/imgui"
 
 	group ""
 
-	project "SK-Gaming-Engine"
-	location "SK-Gaming-Engine"
+	project "SK-Game-Engine"
+	location "SK-Game-Engine"
 	kind "SharedLib"
 	language "C++"
 	staticruntime "off"
@@ -34,7 +34,7 @@ workspace "SK-Gaming-Engine"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "pch.h"
-	pchsource "SK-Gaming-Engine/src/pch.cpp"
+	pchsource "SK-Game-Engine/src/pch.cpp"
 
 	files 
 	{
@@ -107,15 +107,15 @@ project "Sandbox"
 
 	includedirs
 	{
-		"SK-Gaming-Engine/vendor/spdlog/include",
-		"SK-Gaming-Engine/src",
+		"SK-Game-Engine/vendor/spdlog/include",
+		"SK-Game-Engine/src",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
-		"SK-Gaming-Engine"
+		"SK-Game-Engine"
 	}
 
 	filter "system:windows"
