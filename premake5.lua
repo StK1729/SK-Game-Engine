@@ -16,6 +16,7 @@ workspace "SK-Game-Engine"
 	IncludeDir["GLFW"] = "SK-Game-Engine/vendor/GLFW/include"
 	IncludeDir["Glad"] = "SK-Game-Engine/vendor/Glad/include"
 	IncludeDir["ImGui"] = "SK-Game-Engine/vendor/imgui"
+	IncludeDir["glm"] = "SK-Game-Engine/vendor/glm"
 
 	group "Dependencies"
 		include "SK-Game-Engine/vendor/GLFW"
@@ -40,6 +41,8 @@ workspace "SK-Game-Engine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
+		-- "%{prj.name}/vendor/glm/glm/**.hpp",
+		-- "%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -48,7 +51,8 @@ workspace "SK-Game-Engine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -109,8 +113,7 @@ project "Sandbox"
 	{
 		"SK-Game-Engine/vendor/spdlog/include",
 		"SK-Game-Engine/src",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.glm}"
 	}
 
 	links

@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "ImGuiLayer.h"
 #include "SK-Game-Engine/Application.h"
+#include "SK-Game-Engine/KeyCodes.h"
 
 // Temporary
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include "Platform/OpenGL/ImGuiRenderer.h"
 
 namespace SK_Game_Engine
 {
@@ -49,27 +51,27 @@ namespace SK_Game_Engine
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
-		io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
-		io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
-		io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
-		io.KeyMap[ImGuiKey_UpArrow] = GLFW_KEY_UP;
-		io.KeyMap[ImGuiKey_DownArrow] = GLFW_KEY_DOWN;
-		io.KeyMap[ImGuiKey_PageUp] = GLFW_KEY_PAGE_UP;
-		io.KeyMap[ImGuiKey_PageDown] = GLFW_KEY_PAGE_DOWN;
-		io.KeyMap[ImGuiKey_Home] = GLFW_KEY_HOME;
-		io.KeyMap[ImGuiKey_End] = GLFW_KEY_END;
-		io.KeyMap[ImGuiKey_Insert] = GLFW_KEY_INSERT;
-		io.KeyMap[ImGuiKey_Delete] = GLFW_KEY_DELETE;
-		io.KeyMap[ImGuiKey_Backspace] = GLFW_KEY_BACKSPACE;
-		io.KeyMap[ImGuiKey_Space] = GLFW_KEY_SPACE;
-		io.KeyMap[ImGuiKey_Enter] = GLFW_KEY_ENTER;
-		io.KeyMap[ImGuiKey_Escape] = GLFW_KEY_ESCAPE;
-		io.KeyMap[ImGuiKey_A] = GLFW_KEY_A;
-		io.KeyMap[ImGuiKey_C] = GLFW_KEY_C;
-		io.KeyMap[ImGuiKey_V] = GLFW_KEY_V;
-		io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
-		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
-		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
+		io.KeyMap[ImGuiKey_Tab] = SK_KEY_TAB;
+		io.KeyMap[ImGuiKey_LeftArrow] = SK_KEY_LEFT;
+		io.KeyMap[ImGuiKey_RightArrow] = SK_KEY_RIGHT;
+		io.KeyMap[ImGuiKey_UpArrow] = SK_KEY_UP;
+		io.KeyMap[ImGuiKey_DownArrow] = SK_KEY_DOWN;
+		io.KeyMap[ImGuiKey_PageUp] = SK_KEY_PAGE_UP;
+		io.KeyMap[ImGuiKey_PageDown] = SK_KEY_PAGE_DOWN;
+		io.KeyMap[ImGuiKey_Home] = SK_KEY_HOME;
+		io.KeyMap[ImGuiKey_End] = SK_KEY_END;
+		io.KeyMap[ImGuiKey_Insert] = SK_KEY_INSERT;
+		io.KeyMap[ImGuiKey_Delete] = SK_KEY_DELETE;
+		io.KeyMap[ImGuiKey_Backspace] = SK_KEY_BACKSPACE;
+		io.KeyMap[ImGuiKey_Space] = SK_KEY_SPACE;
+		io.KeyMap[ImGuiKey_Enter] = SK_KEY_ENTER;
+		io.KeyMap[ImGuiKey_Escape] = SK_KEY_ESCAPE;
+		io.KeyMap[ImGuiKey_A] = SK_KEY_A;
+		io.KeyMap[ImGuiKey_C] = SK_KEY_C;
+		io.KeyMap[ImGuiKey_V] = SK_KEY_V;
+		io.KeyMap[ImGuiKey_X] = SK_KEY_X;
+		io.KeyMap[ImGuiKey_Y] = SK_KEY_Y;
+		io.KeyMap[ImGuiKey_Z] = SK_KEY_Z;
 
 		//Window& w = Application::Get().GetWindow();
 		//ImGui_ImplGlfw_InitForOpenGL(w.GetNativeWindow(), true);
@@ -130,10 +132,10 @@ namespace SK_Game_Engine
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.KeysDown[e.GetKeyCode()] = true;
-		io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
-		io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
-		io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
-		io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+		io.KeyCtrl = io.KeysDown[SK_KEY_LEFT_CONTROL] || io.KeysDown[SK_KEY_RIGHT_CONTROL];
+		io.KeyShift = io.KeysDown[SK_KEY_LEFT_SHIFT] || io.KeysDown[SK_KEY_RIGHT_SHIFT];
+		io.KeyAlt = io.KeysDown[SK_KEY_LEFT_ALT] || io.KeysDown[SK_KEY_RIGHT_ALT];
+		io.KeySuper = io.KeysDown[SK_KEY_LEFT_SUPER] || io.KeysDown[SK_KEY_RIGHT_SUPER];
 		return false;
 	}
 

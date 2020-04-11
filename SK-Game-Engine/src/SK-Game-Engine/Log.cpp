@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Log.h"
 
+
 namespace SK_Game_Engine {
 
 	std::shared_ptr<spdlog::logger> Log::s_core_logger;

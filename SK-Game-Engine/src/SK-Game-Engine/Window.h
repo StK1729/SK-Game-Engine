@@ -2,7 +2,6 @@
 #include "pch.h"
 #include "SK-Game-Engine/Core.h"
 #include "SK-Game-Engine/Events/Event.h"
-#include <GLFW/glfw3.h>
 
 namespace SK_Game_Engine
 {

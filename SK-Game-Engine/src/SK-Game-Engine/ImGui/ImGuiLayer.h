@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include "SK-Game-Engine/Layer.h"
-#include <imgui.h>
-#include "Platform/OpenGL/ImGuiRenderer.h"
 #include "SK-Game-Engine/Events/MouseEvents.h"
 #include "SK-Game-Engine/Events/ApplicationEvents.h"
 #include "SK-Game-Engine/Events/KeyEvents.h"

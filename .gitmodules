@@ -10,3 +10,6 @@
 	path = SK-Game-Engine/vendor/imgui
 	url = https://github.com/StK1729/imgui.git
 	ignore=dirty
+[submodule "SK-Game-Engine/vendor/glm"]
+	path = SK-Game-Engine/vendor/glm
+	url = https://github.com/g-truc/glm
