@@ -5,6 +5,7 @@
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>
+#include "imgui.h"
 
 
 class ExampleLayer : public SK_Game_Engine::Layer
@@ -29,6 +30,13 @@ public:
 			}
 		}
 	}
+
+	void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello world");
+		ImGui::End();
+	}
 };
 
 glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
@@ -47,7 +55,6 @@ public:
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new SK_Game_Engine::ImGuiLayer());
 	}
 	~Sandbox()
 	{

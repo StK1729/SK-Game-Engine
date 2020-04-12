@@ -2,7 +2,7 @@
 
 #include "SK-Game-Engine/Application.h"
 #include "SK-Game-Engine/Log.h"
-#include "SK-Game-Engine/ImGui/ImGuiLayer.h"
+#include "SK-Game-Engine/Layer.h"
 
 #include "SK-Game-Engine/Input.h"
 #include "SK-Game-Engine/MouseButtonCodes.h"

@@ -2,11 +2,14 @@
 
 
 #ifdef SKGE_PLATFORM_WINDOWS
+	#ifdef DLL
 	#ifdef SKGE_BUILD_DLL
 		#define SKGE_API __declspec(dllexport)
 	#else
 		#define SKGE_API __declspec(dllimport)
 	#endif
+	#endif
+	#define SKGE_API
 #endif
 
 #define BIT(x) ( 1 << x )

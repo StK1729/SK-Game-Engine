@@ -1,31 +1,25 @@
 ﻿#pragma once
 #include "SK-Game-Engine/Layer.h"
 #include "SK-Game-Engine/Events/MouseEvents.h"
-#include "SK-Game-Engine/Events/ApplicationEvents.h"
 #include "SK-Game-Engine/Events/KeyEvents.h"
+#include "SK-Game-Engine/KeyCodes.h"
 
 namespace SK_Game_Engine
 {
-	class SKGE_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnUpdate();
-		void OnEvent(Event& event);
-		void OnAttach();
-		void OnDetach();
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
+		virtual void OnImGuiRender() override;
+
+		void Begin();
+		void End();
 
 	private:
-		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& е);
-		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-		bool OnMouseMovedEvent(MouseMovedEvent& e);
-		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
-		bool OnKeyPressedEvent(KeyPressedEvent& e);
-		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-		bool OnKeyTypedEvent(KeyTypedEvent& e);
-		bool OnWindowResizedEvent(WindowResizeEvent& e);
 		float m_Time = 0.0f;
 	};
 }

@@ -27,7 +27,7 @@ workspace "SK-Game-Engine"
 
 	project "SK-Game-Engine"
 	location "SK-Game-Engine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	staticruntime "off"
 
@@ -70,14 +70,14 @@ workspace "SK-Game-Engine"
 	defines
 	{
 		"SKGE_PLATFORM_WINDOWS",
-		"SKGE_BUILD_DLL",
+		-- "SKGE_BUILD_DLL", not dll anymore
 		"GLFW_INCLUDE_NONE"
 	}
 
-	postbuildcommands
-	{
-		("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-	}
+	-- postbuildcommands
+	-- {
+	-- 	("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+	-- }
 
 	filter "configurations:Debug"
 		defines "SKGE_DEBUG"
@@ -113,7 +113,8 @@ project "Sandbox"
 	{
 		"SK-Game-Engine/vendor/spdlog/include",
 		"SK-Game-Engine/src",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links

@@ -7,16 +7,16 @@
 
 
 namespace SK_Game_Engine{
-	SKGE_API class Log
+	class SKGE_API Log
 	{
 	public:
-		static void SKGE_API Init();
-		inline static SKGE_API std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_core_logger; };
-		inline static SKGE_API std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_client_logger; };
-		void SKGE_API LogInfo(std::string& message);
-		void SKGE_API LogWarning(std::string& message);
-		void SKGE_API LogError(std::string& message);
-		void SKGE_API LogDebug(std::string& message);
+		static void Init();
+		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_core_logger; };
+		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_client_logger; };
+		void LogInfo(std::string& message);
+		void LogWarning(std::string& message);
+		void LogError(std::string& message);
+		void LogDebug(std::string& message);
 	private :
 		static std::shared_ptr<spdlog::logger> s_core_logger;
 		static std::shared_ptr<spdlog::logger> s_client_logger;
