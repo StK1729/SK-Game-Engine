@@ -29,7 +29,7 @@ workspace "SK-Game-Engine"
 	location "SK-Game-Engine"
 	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -43,6 +43,11 @@ workspace "SK-Game-Engine"
 		"%{prj.name}/src/**.cpp"
 		-- "%{prj.name}/vendor/glm/glm/**.hpp",
 		-- "%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -71,7 +76,7 @@ workspace "SK-Game-Engine"
 	{
 		"SKGE_PLATFORM_WINDOWS",
 		-- "SKGE_BUILD_DLL", not dll anymore
-		"GLFW_INCLUDE_NONE"
+		"GLFW_INCLUDE_NONE",
 	}
 
 	-- postbuildcommands
@@ -82,23 +87,23 @@ workspace "SK-Game-Engine"
 	filter "configurations:Debug"
 		defines "SKGE_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "SKGE_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "SKGE_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -134,14 +139,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "SKGE_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "SKGE_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "SKGE_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
