@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SK-Game-Engine/Window.h"
+#include "SK-Game-Engine/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
 namespace SK_Game_Engine {
@@ -26,6 +27,7 @@ namespace SK_Game_Engine {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 		struct WindowData
 		{
 			std::string Title;

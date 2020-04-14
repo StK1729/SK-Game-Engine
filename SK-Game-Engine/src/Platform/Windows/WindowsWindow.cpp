@@ -4,7 +4,7 @@
 #include "SK-Game-Engine/Events/ApplicationEvents.h"
 #include "SK-Game-Engine/Events/KeyEvents.h"
 #include "SK-Game-Engine/Events/MouseEvents.h"
-#include "glad/glad.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 
 namespace SK_Game_Engine
@@ -37,6 +37,8 @@ namespace SK_Game_Engine
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
+		
+
 		SKGE_CORE_INFO("Creating window {0} ({1}, {2})", m_Data.Title, m_Data.Height, m_Data.Width);
 		if (!s_GLWFInitialized)
 		{
@@ -47,9 +49,8 @@ namespace SK_Game_Engine
 		}
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		SKGE_CORE_ASSERT(status, "Failed to initialize glad.")
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -144,7 +145,7 @@ namespace SK_Game_Engine
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 	
 	void WindowsWindow::SetVSync(bool enabled)
