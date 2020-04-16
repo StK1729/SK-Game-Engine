@@ -74,37 +74,44 @@ namespace SK_Game_Engine {
 		m_Shader = std::make_unique<Shader>(vertexSrc, fragmentSrc);
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
-
-		
-
+		m_VertexArray = std::shared_ptr<VertexArray>(VertexArray::Create());
+		m_SquareVertexArray = std::shared_ptr<VertexArray>(VertexArray::Create());
 		float vertices[] =
 		{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
-		m_VertexBuffer = std::unique_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+		float squareVertices[] =
+		{
+			0.3f, 0.3f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			1.0f, 0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+			0.3f, 1.0f, 0.0f, 0.1f, 1.0f, 1.0f, 1.0f
+		};
+		std::shared_ptr<VertexBuffer> vertexBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+		std::shared_ptr<VertexBuffer> squareVertexBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
-		m_VertexBuffer->SetLayout( BufferLayout 
+		vertexBuffer->SetLayout( BufferLayout
 			{
 				{ ShaderDataType::Float3, "v_Position"},
 				{ ShaderDataType::Float4, "v_Color"}
 			});
 
-		uint32_t index = 0;
-		#pragma warning( push )
-		#pragma warning(disable:4312)
-		const BufferLayout& layout = m_VertexBuffer->GetLayout();
-		for (const auto& element : layout) {
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.Count, ShaderDataTypeToOpenGLType(element.Type), element.Normalized ? GL_TRUE: GL_FALSE, layout.GetStride(), reinterpret_cast<const void*>(element.Offset));
-			++index;
-		}
-		#pragma warning( pop )
+		squareVertexBuffer->SetLayout(BufferLayout
+			{
+				{ ShaderDataType::Float3, "v_Position"},
+				{ ShaderDataType::Float4, "v_Color"}
+			});
+
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
+		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 		uint32_t indices[] = { 0,1,2 };
-		m_IndexBuffer = std::unique_ptr<IndexBuffer>(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
+		std::shared_ptr<IndexBuffer> indexBuffer = std::shared_ptr<IndexBuffer>(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
+		m_VertexArray->AddIndexBuffer(indexBuffer);
+		uint32_t squareIndices[] = { 0,1,2, 2,3,0 };
+		std::shared_ptr<IndexBuffer> squareIndexBuffer = std::shared_ptr<IndexBuffer>(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		m_SquareVertexArray->AddIndexBuffer(squareIndexBuffer);
 	}
 
 	Application::~Application()
@@ -153,9 +160,11 @@ namespace SK_Game_Engine {
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Shader->Bind();
-
-			// glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			m_SquareVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			m_Shader->Bind();
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate();
 			}
