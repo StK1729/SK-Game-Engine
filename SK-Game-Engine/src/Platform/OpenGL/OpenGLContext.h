@@ -1,7 +1,7 @@
 #pragma once
 #include "SK-Game-Engine/Renderer/GraphicsContext.h"
 
-extern struct GLFWwindow;
+struct GLFWwindow;
 
 namespace SK_Game_Engine
 {
