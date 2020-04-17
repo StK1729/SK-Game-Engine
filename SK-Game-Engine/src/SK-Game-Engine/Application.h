@@ -8,6 +8,7 @@
 #include "SK-Game-Engine/Renderer/Shader.h"
 #include "SK-Game-Engine/Renderer/Buffer.h"
 #include "SK-Game-Engine/Renderer/VertexArray.h"
+#include "Renderer/Renderer.h"
 
 
 namespace SK_Game_Engine {

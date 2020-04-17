@@ -1,48 +1,12 @@
 #include "pch.h"
 #include "Application.h"
 #include "Log.h"
-#include <glad/glad.h>
 #include "Input.h"
 namespace SK_Game_Engine {
 
 #define BIND_EVENT_FN(x) std::bind(&x , this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
-
-	GLenum ShaderDataTypeToOpenGLType(const ShaderDataType& element)
-	{
-		switch (element) {
-			case ShaderDataType::Float:
-			case ShaderDataType::Float2:
-			case ShaderDataType::Float3:
-			case ShaderDataType::Float4:
-			{
-				return GL_FLOAT;
-			}
-			case ShaderDataType::Int:
-			case ShaderDataType::Int2:
-			case ShaderDataType::Int3:
-			case ShaderDataType::Int4:
-			{
-				return GL_INT;
-			}
-			case ShaderDataType::Mat3:
-			{
-				return GL_FLOAT_MAT3;
-			}
-			case ShaderDataType::Mat4:
-			{
-				return GL_FLOAT_MAT4;
-			}
-			case ShaderDataType::Bool:
-			{
-				return GL_BOOL;
-			}
-		}
-
-		SKGE_CORE_ASSERT(false, "Unknown ShaderDataType");
-		return 0;
-	}
 
 	Application::Application()
 	{
@@ -157,14 +121,15 @@ namespace SK_Game_Engine {
 		while (m_Running)
 		{
 			// glClearColor(0.2f, 0.3f, 0.8f, 1.0f); make it black instead
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
+			RenderCommand::Clear();
+			Renderer::BeginScene();
 			m_Shader->Bind();
-			m_SquareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVertexArray);
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+			Renderer::EndScene();
+
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate();
 			}

@@ -7,14 +7,14 @@ namespace SK_Game_Engine
 {
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
 	{
-		RendererAPI rendererApi = Renderer::GetRendererAPI();
+		RendererAPI::API rendererApi = Renderer::GetRendererAPI();
 		switch (rendererApi) {
-			case RendererAPI::None:
+			case RendererAPI::API::None:
 			{
 				SKGE_CORE_ASSERT(false, "RendererAPI::None is currently not supported.");
 				return nullptr;
 			}
-			case RendererAPI::OpenGL:
+			case RendererAPI::API::OpenGL:
 			{
 				return new OpenGLVertexBuffer(vertices, size);
 			}
@@ -27,14 +27,14 @@ namespace SK_Game_Engine
 	}
 	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
 	{
-		RendererAPI rendererApi = Renderer::GetRendererAPI();
+		RendererAPI::API rendererApi = Renderer::GetRendererAPI();
 		switch (rendererApi) {
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 		{
 			SKGE_CORE_ASSERT(false, "RendererAPI::None is currently not supported.");
 			return nullptr;
 		}
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 		{
 			return new OpenGLIndexBuffer(indices, size);
 		}
