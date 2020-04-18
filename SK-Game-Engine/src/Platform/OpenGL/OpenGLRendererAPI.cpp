@@ -4,6 +4,8 @@
 
 namespace SK_Game_Engine
 {
+	RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
+
 	void OpenGLRendererAPI::Clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

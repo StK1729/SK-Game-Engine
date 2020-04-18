@@ -82,8 +82,4 @@ namespace SK_Game_Engine
 		ImGui::DestroyContext();
 	}
 
-	
-
-
-
 }
