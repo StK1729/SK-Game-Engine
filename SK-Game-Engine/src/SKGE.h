@@ -8,6 +8,16 @@
 #include "SK-Game-Engine/MouseButtonCodes.h"
 #include "SK-Game-Engine/KeyCodes.h"
 
+/* ------------------ Renderer  ------------------ */
+#include "SK-Game-Engine/Renderer/Renderer.h"
+#include "SK-Game-Engine/Renderer/RenderCommand.h"
+
+#include "SK-Game-Engine/Renderer/Buffer.h"
+#include "SK-Game-Engine/Renderer/Shader.h"
+#include "SK-Game-Engine/Renderer/VertexArray.h"
+
+#include "SK-Game-Engine/Renderer/OrthographicCamera.h"
+
 /* ----------------- Entry Point ----------------- */
 
 #include "SK-Game-Engine/EntryPoint.h"

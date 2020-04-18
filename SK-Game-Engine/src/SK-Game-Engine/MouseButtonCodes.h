@@ -1,14 +1,14 @@
 #pragma once
 
-#define SK_MOUSE_BUTTON_1         0
-#define SK_MOUSE_BUTTON_2         1
-#define SK_MOUSE_BUTTON_3         2
-#define SK_MOUSE_BUTTON_4         3
-#define SK_MOUSE_BUTTON_5         4
-#define SK_MOUSE_BUTTON_6         5
-#define SK_MOUSE_BUTTON_7         6
-#define SK_MOUSE_BUTTON_8         7
-#define SK_MOUSE_BUTTON_LAST      SK_MOUSE_BUTTON_8
-#define SK_MOUSE_BUTTON_LEFT      SK_MOUSE_BUTTON_1
-#define SK_MOUSE_BUTTON_RIGHT     SK_MOUSE_BUTTON_2
-#define SK_MOUSE_BUTTON_MIDDLE    SK_MOUSE_BUTTON_3
+#define SKGE_MOUSE_BUTTON_1         0
+#define SKGE_MOUSE_BUTTON_2         1
+#define SKGE_MOUSE_BUTTON_3         2
+#define SKGE_MOUSE_BUTTON_4         3
+#define SKGE_MOUSE_BUTTON_5         4
+#define SKGE_MOUSE_BUTTON_6         5
+#define SKGE_MOUSE_BUTTON_7         6
+#define SKGE_MOUSE_BUTTON_8         7
+#define SKGE_MOUSE_BUTTON_LAST      SKGE_MOUSE_BUTTON_8
+#define SKGE_MOUSE_BUTTON_LEFT      SKGE_MOUSE_BUTTON_1
+#define SKGE_MOUSE_BUTTON_RIGHT     SKGE_MOUSE_BUTTON_2
+#define SKGE_MOUSE_BUTTON_MIDDLE    SKGE_MOUSE_BUTTON_3

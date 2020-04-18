@@ -5,11 +5,6 @@
 #include "LayerStack.h"
 #include "Events/ApplicationEvents.h"
 #include "ImGui/ImGuiLayer.h"
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-#include "Renderer/Renderer.h"
-#include "Renderer/OrthographicCamera.h"
 
 
 namespace SK_Game_Engine {
@@ -33,11 +28,6 @@ namespace SK_Game_Engine {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<VertexArray> m_SquareVertexArray;
-		OrthographicCamera m_Camera;
 	};
 
 	Application* CreateApplication();

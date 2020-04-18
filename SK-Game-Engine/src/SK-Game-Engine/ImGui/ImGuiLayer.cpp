@@ -23,12 +23,8 @@ namespace SK_Game_Engine
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		
-		static bool show = true;
-
+		static bool show = false;
 		ImGui::ShowDemoWindow(&show);
-		float f[] = { 0.2f, 0.3f, 0.8f, 1.0f };
-		ImGui::ColorEdit4("Color Label", f);
 	}
 
 	void ImGuiLayer::Begin()
