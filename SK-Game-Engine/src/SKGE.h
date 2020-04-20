@@ -4,6 +4,8 @@
 #include "SK-Game-Engine/Log.h"
 #include "SK-Game-Engine/Layer.h"
 
+#include "SK-Game-Engine/Core/TimeStep.h"
+
 #include "SK-Game-Engine/Input.h"
 #include "SK-Game-Engine/MouseButtonCodes.h"
 #include "SK-Game-Engine/KeyCodes.h"

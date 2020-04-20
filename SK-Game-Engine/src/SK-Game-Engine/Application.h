@@ -5,6 +5,7 @@
 #include "LayerStack.h"
 #include "Events/ApplicationEvents.h"
 #include "ImGui/ImGuiLayer.h"
+#include "Core/TimeStep.h"
 
 
 namespace SK_Game_Engine {
@@ -28,6 +29,7 @@ namespace SK_Game_Engine {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime;
 	};
 
 	Application* CreateApplication();

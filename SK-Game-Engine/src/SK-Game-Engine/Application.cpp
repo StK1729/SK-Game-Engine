@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Log.h"
 #include "Input.h"
+#include <GLFW/glfw3.h> // temporary until platform is configured.
 
 namespace SK_Game_Engine {
 
@@ -10,10 +11,10 @@ namespace SK_Game_Engine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
+		: m_Window { std::unique_ptr<Window>(Window::Create()) } , m_LastFrameTime{ 0.0f }
 	{
 		SKGE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 		m_ImGuiLayer = new SK_Game_Engine::ImGuiLayer();
 		PushLayer(m_ImGuiLayer);
@@ -40,7 +41,7 @@ namespace SK_Game_Engine {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
-		SKGE_CORE_TRACE("{0}", e);
+		// SKGE_CORE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
 			(*--it)->OnEvent(e);
@@ -62,9 +63,12 @@ namespace SK_Game_Engine {
 		auto [x, y] = Input::GetMouseCursorPos();
 		while (m_Running)
 		{
+			float time = (float)glfwGetTime();
+			Timestep timestep{ time - m_LastFrameTime };
+			m_LastFrameTime = time;
 
 			for (Layer* layer : m_LayerStack) {
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 			}
 
 			m_ImGuiLayer->Begin();

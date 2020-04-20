@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "SK-Game-Engine/Events/Event.h"
+#include "Core/TimeStep.h"
 
 namespace SK_Game_Engine {
 	class SKGE_API Layer
@@ -11,7 +12,7 @@ namespace SK_Game_Engine {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(const Timestep& timestep) {}
 		virtual void OnEvent(Event& event) {}
 		virtual void OnImGuiRender() {}
 

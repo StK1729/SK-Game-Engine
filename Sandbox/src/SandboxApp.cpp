@@ -12,7 +12,7 @@ class ExampleLayer : public SK_Game_Engine::Layer
 {
 public:
 	ExampleLayer() : Layer("Example")
-		, m_Camera { -1.6f, 1.6f, -0.9f, 0.9f }, m_CameraPosiition{0.0f}, m_CameraSpeed{0.1f}, m_CameraRotation{0.0f}, m_CameraRotationSpeed{2.0f}
+		, m_Camera{ -1.6f, 1.6f, -0.9f, 0.9f }, m_CameraPosiition{ 0.0f }, m_CameraMoveSpeed{ 5.0f }, m_CameraRotation{ 0.0f }, m_CameraRotationSpeed{ 180.0f }
 	{
 		std::string vertexSrc = R"(
 		#version 450 core
@@ -79,30 +79,31 @@ public:
 		m_SquareVertexArray->AddIndexBuffer(squareIndexBuffer);
 	}
 
-	void OnUpdate() override
+	void OnUpdate(const SK_Game_Engine::Timestep& timestep) override
 	{
+		float timeInSeconds = timestep.GetSeconds();
 		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_LEFT)) {
-			m_CameraPosiition.x -= m_CameraSpeed;
-		} 
+			m_CameraPosiition.x -= m_CameraMoveSpeed * timeInSeconds;
+		}
 		else if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_RIGHT)) {
-			m_CameraPosiition.x += m_CameraSpeed;
+			m_CameraPosiition.x += m_CameraMoveSpeed * timeInSeconds;
 		}
 
 		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_DOWN)) {
-			m_CameraPosiition.y -= m_CameraSpeed;
+			m_CameraPosiition.y -= m_CameraMoveSpeed * timeInSeconds;
 		}
 		else if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_UP)) {
-			m_CameraPosiition.y += m_CameraSpeed;
+			m_CameraPosiition.y += m_CameraMoveSpeed * timeInSeconds;
 		}
 
 		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_A))
 		{
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * timeInSeconds;
 		}
 
 		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_D))
 		{
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * timeInSeconds;
 		}
 
 		// glClearColor(0.2f, 0.3f, 0.8f, 1.0f); make it black instead
@@ -116,11 +117,11 @@ public:
 		SK_Game_Engine::Renderer::EndScene();
 	}
 
-	void OnEvent(SK_Game_Engine::Event& event) override 
+	void OnEvent(SK_Game_Engine::Event& event) override
 	{
 	}
 
-	
+
 
 	void OnImGuiRender() override
 	{
@@ -131,7 +132,7 @@ private:
 	std::shared_ptr<SK_Game_Engine::VertexArray> m_SquareVertexArray;
 	SK_Game_Engine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosiition;
-	float m_CameraSpeed;
+	float m_CameraMoveSpeed;
 	float m_CameraRotation;
 	float m_CameraRotationSpeed;
 };
@@ -149,7 +150,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 class Sandbox : public SK_Game_Engine::Application
 {
 public:
-	Sandbox() 
+	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
 	}
