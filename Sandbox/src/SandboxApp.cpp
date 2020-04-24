@@ -11,8 +11,12 @@
 class ExampleLayer : public SK_Game_Engine::Layer
 {
 public:
-	ExampleLayer() : Layer("Example")
-		, m_Camera{ -1.6f, 1.6f, -0.9f, 0.9f }, m_CameraPosiition{ 0.0f }, m_CameraMoveSpeed{ 5.0f }, m_CameraRotation{ 0.0f }, m_CameraRotationSpeed{ 180.0f }
+	ExampleLayer() : Layer("Example"),
+		m_Camera{ -1.6f, 1.6f, -0.9f, 0.9f },
+		m_CameraPosiition{ 0.0f },
+		m_CameraMoveSpeed{ 5.0f },
+		m_CameraRotation{ 0.0f },
+		m_CameraRotationSpeed{ 180.0f }
 	{
 		std::string vertexSrc = R"(
 		#version 450 core
@@ -20,6 +24,7 @@ public:
 		layout(location = 1) in vec4 v_Color;
 
 		uniform mat4 u_ViewProjectionMatrix;
+		uniform mat4 u_TransformationMatrix;
 
 		out vec3 o_Position;
 		out vec4 o_Color;
@@ -27,8 +32,9 @@ public:
 		{
 			o_Position = v_Position;
 			o_Color = v_Color;
-			gl_Position = u_ViewProjectionMatrix * vec4(v_Position, 1.0);
+			gl_Position = u_ViewProjectionMatrix * u_TransformationMatrix *vec4(v_Position, 1.0);
 		})";
+
 		std::string fragmentSrc = R"(
 		#version 450 core
 		layout(location = 0) out vec4 v_Color;
@@ -38,7 +44,36 @@ public:
 		{
 			v_Color = o_Color;
 		})";
+
+		std::string squareVertexSrc = R"(
+		#version 450 core
+		layout(location = 0) in vec3 v_Position;
+		layout(location = 1) in vec4 v_Color;
+
+		uniform mat4 u_ViewProjectionMatrix;
+		uniform mat4 u_TransformationMatrix;
+
+		out vec3 o_Position;
+		out vec4 o_Color;
+		void main()
+		{
+			o_Position = v_Position;
+			o_Color = v_Color;
+			gl_Position = u_ViewProjectionMatrix * u_TransformationMatrix *vec4(v_Position, 1.0);
+		})";
+
+		std::string squareFragmentSrc = R"(
+		#version 450 core
+		layout(location = 0) out vec4 v_Color;
+		in vec3 o_Position;
+		in vec4 o_Color;
+		void main()
+		{
+			v_Color = vec4(0.3, 0.2, 0.8, 1.0);
+		})";
+
 		m_Shader = std::make_shared<SK_Game_Engine::Shader>(vertexSrc, fragmentSrc);
+		m_SquareShader = std::make_shared<SK_Game_Engine::Shader>( squareVertexSrc, squareFragmentSrc);
 		m_VertexArray = std::shared_ptr<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		m_SquareVertexArray = std::shared_ptr<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		float vertices[] =
@@ -49,10 +84,10 @@ public:
 		};
 		float squareVertices[] =
 		{
-			0.3f, 0.3f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-			1.0f, 0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-			0.3f, 1.0f, 0.0f, 0.1f, 1.0f, 1.0f, 1.0f
+			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+			-0.5f, 0.5f, 0.0f, 0.1f, 1.0f, 1.0f, 1.0f
 		};
 		std::shared_ptr<SK_Game_Engine::VertexBuffer> vertexBuffer = std::shared_ptr<SK_Game_Engine::VertexBuffer>(SK_Game_Engine::VertexBuffer::Create(vertices, sizeof(vertices)));
 		std::shared_ptr<SK_Game_Engine::VertexBuffer> squareVertexBuffer = std::shared_ptr<SK_Game_Engine::VertexBuffer>(SK_Game_Engine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -112,8 +147,15 @@ public:
 		m_Camera.SetPosition(m_CameraPosiition);
 		m_Camera.SetRotation(m_CameraRotation);
 		SK_Game_Engine::Renderer::BeginScene(m_Camera);
-		SK_Game_Engine::Renderer::Submit(m_Shader, m_SquareVertexArray);
-		SK_Game_Engine::Renderer::Submit(m_Shader, m_VertexArray);
+		static glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.1f));
+		for (int j = 0; j < 20; ++j) {
+			for (int i = 0; i < 20; ++i) {
+				glm::vec3 position{ -1.65f + i * 0.11f, 0.8f - j * 0.11f, 0.0f };
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * scale;
+				SK_Game_Engine::Renderer::Submit(m_SquareShader, m_SquareVertexArray, transform);
+			}
+		}
+		//SK_Game_Engine::Renderer::Submit(m_Shader, m_VertexArray);
 		SK_Game_Engine::Renderer::EndScene();
 	}
 
@@ -128,6 +170,7 @@ public:
 	}
 private:
 	std::shared_ptr<SK_Game_Engine::Shader> m_Shader;
+	std::shared_ptr<SK_Game_Engine::Shader> m_SquareShader;
 	std::shared_ptr<SK_Game_Engine::VertexArray> m_VertexArray;
 	std::shared_ptr<SK_Game_Engine::VertexArray> m_SquareVertexArray;
 	SK_Game_Engine::OrthographicCamera m_Camera;
