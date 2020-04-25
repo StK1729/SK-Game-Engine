@@ -1,20 +1,16 @@
 #pragma once
 #include <string>
 #include "SK-Game-Engine/Core.h"
-#include <glm/glm.hpp>
 
 namespace SK_Game_Engine {
 	class SKGE_API Shader {
 	public:
-		Shader(const std::string vertexSrc, const std::string frahmentSrc);
-		~Shader();
+		virtual ~Shader() {}
 
-		void Bind() const;
-		void Unbind() const;
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
-		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
-	private:
-		uint32_t m_RendererId;
+		static Shader* Create(const std::string vertexSrc, const std::string fragmentSrc);
 	};
 
 }

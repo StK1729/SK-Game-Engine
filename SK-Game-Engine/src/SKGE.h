@@ -16,6 +16,7 @@
 
 #include "SK-Game-Engine/Renderer/Buffer.h"
 #include "SK-Game-Engine/Renderer/Shader.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 #include "SK-Game-Engine/Renderer/VertexArray.h"
 
 #include "SK-Game-Engine/Renderer/OrthographicCamera.h"

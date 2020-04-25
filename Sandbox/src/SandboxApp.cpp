@@ -5,6 +5,7 @@
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "imgui.h"
 
 
@@ -16,7 +17,8 @@ public:
 		m_CameraPosiition{ 0.0f },
 		m_CameraMoveSpeed{ 5.0f },
 		m_CameraRotation{ 0.0f },
-		m_CameraRotationSpeed{ 180.0f }
+		m_CameraRotationSpeed{ 180.0f },
+		m_Color{ 0.2f, 0.3f, 0.8f, 1.0f }
 	{
 		std::string vertexSrc = R"(
 		#version 450 core
@@ -67,13 +69,14 @@ public:
 		layout(location = 0) out vec4 v_Color;
 		in vec3 o_Position;
 		in vec4 o_Color;
+		uniform vec4 u_Color;
 		void main()
 		{
-			v_Color = vec4(0.3, 0.2, 0.8, 1.0);
+			v_Color = u_Color;
 		})";
 
-		m_Shader = std::make_shared<SK_Game_Engine::Shader>(vertexSrc, fragmentSrc);
-		m_SquareShader = std::make_shared<SK_Game_Engine::Shader>( squareVertexSrc, squareFragmentSrc);
+		m_Shader = std::shared_ptr<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(vertexSrc, fragmentSrc));
+		m_SquareShader = std::shared_ptr<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(squareVertexSrc, squareFragmentSrc));
 		m_VertexArray = std::shared_ptr<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		m_SquareVertexArray = std::shared_ptr<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		float vertices[] =
@@ -148,6 +151,8 @@ public:
 		m_Camera.SetRotation(m_CameraRotation);
 		SK_Game_Engine::Renderer::BeginScene(m_Camera);
 		static glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.1f));
+		m_SquareShader->Bind();
+		std::dynamic_pointer_cast<SK_Game_Engine::OpenGLShader>(m_SquareShader)->UploadUniformFloat4("u_Color", m_Color);
 		for (int j = 0; j < 20; ++j) {
 			for (int i = 0; i < 20; ++i) {
 				glm::vec3 position{ -1.65f + i * 0.11f, 0.8f - j * 0.11f, 0.0f };
@@ -167,6 +172,10 @@ public:
 
 	void OnImGuiRender() override
 	{
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit4("Color", glm::value_ptr(m_Color));
+		ImGui::End();
+
 	}
 private:
 	std::shared_ptr<SK_Game_Engine::Shader> m_Shader;
@@ -178,6 +187,7 @@ private:
 	float m_CameraMoveSpeed;
 	float m_CameraRotation;
 	float m_CameraRotationSpeed;
+	glm::vec4 m_Color;
 };
 
 glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
