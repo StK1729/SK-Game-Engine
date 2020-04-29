@@ -7,7 +7,7 @@ namespace SK_Game_Engine
 	class SKGE_API RenderCommand
 	{
 	public:
-		inline static void RenderCommand::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		inline static void RenderCommand::DrawIndexed(const Ref<VertexArray>& vertexArray)
 		{ 
 			s_RendererAPI->DrawIndexed(vertexArray); 
 		}

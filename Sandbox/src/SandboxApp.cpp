@@ -1,5 +1,5 @@
 #include <SKGE.h>
-#include <memory>
+#include "SK-Game-Engine/Core.h"
 
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
@@ -75,10 +75,10 @@ public:
 			v_Color = u_Color;
 		})";
 
-		m_Shader = std::shared_ptr<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(vertexSrc, fragmentSrc));
-		m_SquareShader = std::shared_ptr<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(squareVertexSrc, squareFragmentSrc));
-		m_VertexArray = std::shared_ptr<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
-		m_SquareVertexArray = std::shared_ptr<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
+		m_Shader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(vertexSrc, fragmentSrc));
+		m_SquareShader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(squareVertexSrc, squareFragmentSrc));
+		m_VertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
+		m_SquareVertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		float vertices[] =
 		{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -92,8 +92,8 @@ public:
 			0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 			-0.5f, 0.5f, 0.0f, 0.1f, 1.0f, 1.0f, 1.0f
 		};
-		std::shared_ptr<SK_Game_Engine::VertexBuffer> vertexBuffer = std::shared_ptr<SK_Game_Engine::VertexBuffer>(SK_Game_Engine::VertexBuffer::Create(vertices, sizeof(vertices)));
-		std::shared_ptr<SK_Game_Engine::VertexBuffer> squareVertexBuffer = std::shared_ptr<SK_Game_Engine::VertexBuffer>(SK_Game_Engine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		SK_Game_Engine::Ref<SK_Game_Engine::VertexBuffer> vertexBuffer = SK_Game_Engine::Ref<SK_Game_Engine::VertexBuffer>(SK_Game_Engine::VertexBuffer::Create(vertices, sizeof(vertices)));
+		SK_Game_Engine::Ref<SK_Game_Engine::VertexBuffer> squareVertexBuffer = SK_Game_Engine::Ref<SK_Game_Engine::VertexBuffer>(SK_Game_Engine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		vertexBuffer->SetLayout(SK_Game_Engine::BufferLayout
 			{
@@ -110,10 +110,10 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 		uint32_t indices[] = { 0,1,2 };
-		std::shared_ptr<SK_Game_Engine::IndexBuffer> indexBuffer = std::shared_ptr<SK_Game_Engine::IndexBuffer>(SK_Game_Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		SK_Game_Engine::Ref<SK_Game_Engine::IndexBuffer> indexBuffer = SK_Game_Engine::Ref<SK_Game_Engine::IndexBuffer>(SK_Game_Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->AddIndexBuffer(indexBuffer);
 		uint32_t squareIndices[] = { 0,1,2, 2,3,0 };
-		std::shared_ptr<SK_Game_Engine::IndexBuffer> squareIndexBuffer = std::shared_ptr<SK_Game_Engine::IndexBuffer>(SK_Game_Engine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		SK_Game_Engine::Ref<SK_Game_Engine::IndexBuffer> squareIndexBuffer = SK_Game_Engine::Ref<SK_Game_Engine::IndexBuffer>(SK_Game_Engine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVertexArray->AddIndexBuffer(squareIndexBuffer);
 	}
 
@@ -178,10 +178,10 @@ public:
 
 	}
 private:
-	std::shared_ptr<SK_Game_Engine::Shader> m_Shader;
-	std::shared_ptr<SK_Game_Engine::Shader> m_SquareShader;
-	std::shared_ptr<SK_Game_Engine::VertexArray> m_VertexArray;
-	std::shared_ptr<SK_Game_Engine::VertexArray> m_SquareVertexArray;
+	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_Shader;
+	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_SquareShader;
+	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_VertexArray;
+	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_SquareVertexArray;
 	SK_Game_Engine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosiition;
 	float m_CameraMoveSpeed;

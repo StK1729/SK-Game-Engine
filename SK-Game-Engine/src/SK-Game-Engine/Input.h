@@ -18,6 +18,6 @@ namespace SK_Game_Engine
 		virtual std::pair<double, double> GetMouseCursorPosImpl() = 0;
 		virtual double GetMousePosXImpl() = 0;
 		virtual double GetMousePosYImpl() = 0;
-		static std::unique_ptr<Input> s_Instance;
+		static Ref<Input> s_Instance;
 	};
 }

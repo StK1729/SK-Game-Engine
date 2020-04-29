@@ -14,7 +14,7 @@ namespace SK_Game_Engine
 	public:
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
+		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
 
 		inline static RendererAPI::API GetRendererAPI() { return RendererAPI::GetAPI(); }
 	private:
@@ -22,6 +22,6 @@ namespace SK_Game_Engine
 		{
 			glm::mat4 ViewProjectionMatrix;
 		};
-		static std::unique_ptr<SceneData> s_SceneData;
+		static Scope<SceneData> s_SceneData;
 	};
 }

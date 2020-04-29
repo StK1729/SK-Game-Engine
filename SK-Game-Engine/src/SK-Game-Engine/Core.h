@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 
 #ifdef SKGE_PLATFORM_WINDOWS
@@ -27,3 +28,12 @@
 #endif
 
 #define SKGE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace SK_Game_Engine
+{
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}

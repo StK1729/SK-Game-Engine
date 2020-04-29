@@ -5,7 +5,7 @@
 
 namespace SK_Game_Engine {
 
-	std::unique_ptr<Input> Input::s_Instance = std::make_unique<WindowsInput>();
+	Ref<Input> Input::s_Instance = std::make_unique<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{

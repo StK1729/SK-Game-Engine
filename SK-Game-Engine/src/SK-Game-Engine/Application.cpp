@@ -11,7 +11,7 @@ namespace SK_Game_Engine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
-		: m_Window { std::unique_ptr<Window>(Window::Create()) } , m_LastFrameTime{ 0.0f }
+		: m_Window { Ref<Window>(Window::Create()) } , m_LastFrameTime{ 0.0f }
 	{
 		SKGE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
