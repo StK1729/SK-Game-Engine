@@ -71,32 +71,8 @@ public:
 			v_Color = u_Color;
 		})";
 
-		std::string textureVertexShaderSrc = R"(
-		#version 450 core
-		layout(location = 0) in vec3 v_Position;
-		layout(location = 1) in vec2 v_TexCoord;
-		uniform mat4 u_ViewProjectionMatrix;
-		uniform mat4 u_TransformationMatrix;
-
-		out vec2 o_TexCoord;
-		void main()
-		{
-			o_TexCoord = v_TexCoord;
-			gl_Position = u_ViewProjectionMatrix * u_TransformationMatrix *vec4(v_Position, 1.0);
-		})";
-
-		std::string textureFragmentShaderSrc = R"(
-		#version 450 core
-		layout(location = 0) out vec4 v_Color;
-		in vec2 o_TexCoord;
-		uniform sampler2D u_Texture;
-		void main()
-		{
-			v_Color = texture(u_Texture, o_TexCoord);
-		})";
-
 		// m_Shader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(vertexSrc, fragmentSrc));
-		m_TextureShader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(textureVertexShaderSrc, textureFragmentShaderSrc));
+		m_TextureShader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create("assets/shaders/TextureShaders.glsl"));
 		m_SquareShader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(squareVertexSrc, squareFragmentSrc));
 		m_VertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		m_SquareVertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
@@ -144,7 +120,7 @@ public:
 		m_LogoTexture = SK_Game_Engine::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		m_TextureShader->Bind();
-		std::dynamic_pointer_cast<SK_Game_Engine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		m_TextureShader->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(const SK_Game_Engine::Timestep& timestep) override
@@ -182,7 +158,7 @@ public:
 		SK_Game_Engine::Renderer::BeginScene(m_Camera);
 		static glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.1f));
 		m_SquareShader->Bind();
-		std::dynamic_pointer_cast<SK_Game_Engine::OpenGLShader>(m_SquareShader)->UploadUniformFloat4("u_Color", m_Color);
+		m_SquareShader->UploadUniformFloat4("u_Color", m_Color);
 		for (int j = 0; j < 20; ++j) {
 			for (int i = 0; i < 20; ++i) {
 				glm::vec3 position{ -1.65f + i * 0.11f, 0.8f - j * 0.11f, 0.0f };
