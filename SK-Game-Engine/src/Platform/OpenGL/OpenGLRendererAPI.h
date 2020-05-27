@@ -7,6 +7,7 @@ namespace SK_Game_Engine
 	class SKGE_API OpenGLRendererAPI : public RendererAPI
 	{
 	public:
+		virtual void Init() override;
 		void Clear() override;
 		void SetClearColor(const glm::vec4& color) override;
 		void DrawIndexed(const Ref<VertexArray>& vertexArray) override;

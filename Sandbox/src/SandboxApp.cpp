@@ -141,6 +141,7 @@ public:
 
 
 		m_Texture = SK_Game_Engine::Texture2D::Create("assets/textures/ChernoCheckerboard.png");
+		m_LogoTexture = SK_Game_Engine::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		m_TextureShader->Bind();
 		std::dynamic_pointer_cast<SK_Game_Engine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -193,6 +194,8 @@ public:
 		//SK_Game_Engine::Renderer::Submit(m_Shader, m_VertexArray);
 		m_Texture->Bind();
 		SK_Game_Engine::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1), glm::vec3(1.5f)));
+		m_LogoTexture->Bind();
+		SK_Game_Engine::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		SK_Game_Engine::Renderer::EndScene();
 	}
 
@@ -213,7 +216,7 @@ private:
 	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_Shader;
 	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_SquareShader, m_TextureShader;
 	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_VertexArray;
-	SK_Game_Engine::Ref<SK_Game_Engine::Texture2D> m_Texture;
+	SK_Game_Engine::Ref<SK_Game_Engine::Texture2D> m_Texture, m_LogoTexture;
 	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_SquareVertexArray;
 	SK_Game_Engine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosiition;

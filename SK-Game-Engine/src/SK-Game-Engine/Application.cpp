@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Log.h"
 #include "Input.h"
+#include "Renderer/Renderer.h"
 #include <GLFW/glfw3.h> // temporary until platform is configured.
 
 namespace SK_Game_Engine {
@@ -16,6 +17,9 @@ namespace SK_Game_Engine {
 		SKGE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		Renderer::Init();
+
 		m_ImGuiLayer = new SK_Game_Engine::ImGuiLayer();
 		PushLayer(m_ImGuiLayer);
 	}
