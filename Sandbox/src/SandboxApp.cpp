@@ -18,7 +18,8 @@ public:
 		m_CameraMoveSpeed{ 5.0f },
 		m_CameraRotation{ 0.0f },
 		m_CameraRotationSpeed{ 180.0f },
-		m_Color{ 0.2f, 0.3f, 0.8f, 1.0f }
+		m_Color{ 0.2f, 0.3f, 0.8f, 1.0f },
+		m_ShaderLibrary{ std::make_unique<SK_Game_Engine::ShaderLibrary>() }
 	{
 		std::string vertexSrc = R"(
 		#version 450 core
@@ -72,8 +73,8 @@ public:
 		})";
 
 		// m_Shader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(vertexSrc, fragmentSrc));
-		m_TextureShader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create("assets/shaders/TextureShaders.glsl"));
-		m_SquareShader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(squareVertexSrc, squareFragmentSrc));
+		m_ShaderLibrary->Load("assets/shaders/TextureShaders.glsl");
+		m_SquareShader = SK_Game_Engine::Shader::Create("SquareVertexShader", squareVertexSrc, squareFragmentSrc);
 		m_VertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		m_SquareVertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
 		float vertices[] =
@@ -119,8 +120,9 @@ public:
 		m_Texture = SK_Game_Engine::Texture2D::Create("assets/textures/ChernoCheckerboard.png");
 		m_LogoTexture = SK_Game_Engine::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		m_TextureShader->Bind();
-		m_TextureShader->UploadUniformInt("u_Texture", 0);
+		auto textureShader = m_ShaderLibrary->Get("TextureShaders");
+		textureShader->Bind();
+		textureShader->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(const SK_Game_Engine::Timestep& timestep) override
@@ -169,9 +171,9 @@ public:
 		// Triangle
 		//SK_Game_Engine::Renderer::Submit(m_Shader, m_VertexArray);
 		m_Texture->Bind();
-		SK_Game_Engine::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1), glm::vec3(1.5f)));
+		SK_Game_Engine::Renderer::Submit(m_ShaderLibrary->Get("TextureShaders"), m_SquareVertexArray, glm::scale(glm::mat4(1), glm::vec3(1.5f)));
 		m_LogoTexture->Bind();
-		SK_Game_Engine::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		SK_Game_Engine::Renderer::Submit(m_ShaderLibrary->Get("TextureShaders"), m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		SK_Game_Engine::Renderer::EndScene();
 	}
 
@@ -190,10 +192,11 @@ public:
 	}
 private:
 	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_Shader;
-	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_SquareShader, m_TextureShader;
+	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_SquareShader;
 	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_VertexArray;
 	SK_Game_Engine::Ref<SK_Game_Engine::Texture2D> m_Texture, m_LogoTexture;
 	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_SquareVertexArray;
+	SK_Game_Engine::Scope<SK_Game_Engine::ShaderLibrary> m_ShaderLibrary;
 	SK_Game_Engine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosiition;
 	float m_CameraMoveSpeed;

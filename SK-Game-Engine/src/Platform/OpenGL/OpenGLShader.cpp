@@ -22,7 +22,7 @@ namespace SK_Game_Engine
 	static std::string ReadFile(const std::string& filepath)
 	{
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in) {
 			in.seekg(0, std::ios::end);
 			result.resize(in.tellg());
@@ -57,9 +57,10 @@ namespace SK_Game_Engine
 	}
 
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 		: m_RendererId{ 0 }
 	{
+		m_Name = name;
 		std::unordered_map<GLenum, std::string> shaderSources{ {GL_VERTEX_SHADER, vertexSource}, {GL_FRAGMENT_SHADER, fragmentSource } };
 		Compile(shaderSources);
 	}
@@ -70,24 +71,43 @@ namespace SK_Game_Engine
 		std::string shaderSource = ReadFile(filepath);
 		std::unordered_map<GLenum, std::string> shaderSources = PreProcess(shaderSource);
 		Compile(shaderSources);
+		auto lastSlash = filepath.find_last_of('/');
+		lastSlash = lastSlash == std::string::npos ? 0 : ++lastSlash;
+		auto lastDot = filepath.rfind('.');
+		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+		m_Name = filepath.substr(lastSlash, count);
 	}
+
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& filepath)
+		: m_RendererId{ 0 }
+	{
+		std::string shaderSource = ReadFile(filepath);
+		std::unordered_map<GLenum, std::string> shaderSources = PreProcess(shaderSource);
+		Compile(shaderSources);
+		m_Name = name;
+	}
+
 	OpenGLShader::~OpenGLShader()
 	{
 		glDeleteProgram(m_RendererId);
 	}
+
 	void OpenGLShader::Bind() const
 	{
 		glUseProgram(m_RendererId);
 	}
+
 	void OpenGLShader::Unbind() const
 	{
 		glUseProgram(0);
 	}
+
 	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
 	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
@@ -126,11 +146,12 @@ namespace SK_Game_Engine
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
-		std::vector<GLuint> shaderIds(shaderSources.size());
+		std::vector<GLuint> shaderIds;
+		shaderIds.reserve(shaderSources.size());
 		uint32_t program = glCreateProgram();
-		for (auto& kv : shaderSources) {
-			GLenum type = kv.first;
-			const std::string& shaderSource = kv.second;
+		for (const std::pair<GLenum, std::string>& keyValuePair : shaderSources) {
+			GLenum type = keyValuePair.first;
+			const std::string& shaderSource = keyValuePair.second;
 			// Read our shader into the appropriate buffers
 
 			// Create an empty shader handle
