@@ -13,11 +13,7 @@ class ExampleLayer : public SK_Game_Engine::Layer
 {
 public:
 	ExampleLayer() : Layer("Example"),
-		m_Camera{ -1.6f, 1.6f, -0.9f, 0.9f },
-		m_CameraPosiition{ 0.0f },
-		m_CameraMoveSpeed{ 5.0f },
-		m_CameraRotation{ 0.0f },
-		m_CameraRotationSpeed{ 180.0f },
+		m_CameraController{ 1280.0f / 720.0f },
 		m_Color{ 0.2f, 0.3f, 0.8f, 1.0f },
 		m_ShaderLibrary{ std::make_unique<SK_Game_Engine::ShaderLibrary>() }
 	{
@@ -127,37 +123,11 @@ public:
 
 	void OnUpdate(const SK_Game_Engine::Timestep& timestep) override
 	{
-		float timeInSeconds = timestep.GetSeconds();
-		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_LEFT)) {
-			m_CameraPosiition.x -= m_CameraMoveSpeed * timeInSeconds;
-		}
-		else if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_RIGHT)) {
-			m_CameraPosiition.x += m_CameraMoveSpeed * timeInSeconds;
-		}
-
-		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_DOWN)) {
-			m_CameraPosiition.y -= m_CameraMoveSpeed * timeInSeconds;
-		}
-		else if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_UP)) {
-			m_CameraPosiition.y += m_CameraMoveSpeed * timeInSeconds;
-		}
-
-		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_A))
-		{
-			m_CameraRotation += m_CameraRotationSpeed * timeInSeconds;
-		}
-
-		if (SK_Game_Engine::Input::IsKeyPressed(SKGE_KEY_D))
-		{
-			m_CameraRotation -= m_CameraRotationSpeed * timeInSeconds;
-		}
-
+		m_CameraController.OnUpdate(timestep);
 		// glClearColor(0.2f, 0.3f, 0.8f, 1.0f); make it black instead
 		SK_Game_Engine::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 		SK_Game_Engine::RenderCommand::Clear();
-		m_Camera.SetPosition(m_CameraPosiition);
-		m_Camera.SetRotation(m_CameraRotation);
-		SK_Game_Engine::Renderer::BeginScene(m_Camera);
+		SK_Game_Engine::Renderer::BeginScene(m_CameraController.GetCamera());
 		static glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.1f));
 		m_SquareShader->Bind();
 		m_SquareShader->UploadUniformFloat4("u_Color", m_Color);
@@ -179,6 +149,7 @@ public:
 
 	void OnEvent(SK_Game_Engine::Event& event) override
 	{
+		m_CameraController.OnEvent(event);
 	}
 
 
@@ -197,11 +168,7 @@ private:
 	SK_Game_Engine::Ref<SK_Game_Engine::Texture2D> m_Texture, m_LogoTexture;
 	SK_Game_Engine::Ref<SK_Game_Engine::VertexArray> m_SquareVertexArray;
 	SK_Game_Engine::Scope<SK_Game_Engine::ShaderLibrary> m_ShaderLibrary;
-	SK_Game_Engine::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPosiition;
-	float m_CameraMoveSpeed;
-	float m_CameraRotation;
-	float m_CameraRotationSpeed;
+	SK_Game_Engine::OrthographicCameraController m_CameraController;
 	glm::vec4 m_Color;
 };
 

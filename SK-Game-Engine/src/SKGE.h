@@ -19,7 +19,7 @@
 #include "SK-Game-Engine/Renderer/Texture.h"
 #include "SK-Game-Engine/Renderer/VertexArray.h"
 
-#include "SK-Game-Engine/Renderer/OrthographicCamera.h"
+#include "SK-Game-Engine/Renderer/OrthographicCameraController.h"
 
 /* ----------------- Entry Point ----------------- */
 
