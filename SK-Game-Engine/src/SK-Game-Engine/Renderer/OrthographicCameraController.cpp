@@ -22,15 +22,13 @@ namespace SK_Game_Engine
 		float timeInSeconds = ts.GetSeconds();
 		if (Input::IsKeyPressed(SKGE_KEY_A) || Input::IsKeyPressed(SKGE_KEY_LEFT)) {
 			m_CameraPosition.x -= m_CameraTranslationSpeed * timeInSeconds;
-		}
-		else if (Input::IsKeyPressed(SKGE_KEY_D) || Input::IsKeyPressed(SKGE_KEY_RIGHT)) {
+		} else if (Input::IsKeyPressed(SKGE_KEY_D) || Input::IsKeyPressed(SKGE_KEY_RIGHT)) {
 			m_CameraPosition.x += m_CameraTranslationSpeed * timeInSeconds;
 		}
 
 		if (Input::IsKeyPressed(SKGE_KEY_S) || Input::IsKeyPressed(SKGE_KEY_DOWN)) {
 			m_CameraPosition.y -= m_CameraTranslationSpeed * timeInSeconds;
-		}
-		else if (Input::IsKeyPressed(SKGE_KEY_W) || Input::IsKeyPressed(SKGE_KEY_UP)) {
+		} else if (Input::IsKeyPressed(SKGE_KEY_W) || Input::IsKeyPressed(SKGE_KEY_UP)) {
 			m_CameraPosition.y += m_CameraTranslationSpeed * timeInSeconds;
 		}
 
@@ -47,7 +45,9 @@ namespace SK_Game_Engine
 		}
 
 		m_Camera.SetPosition(m_CameraPosition);
+		m_CameraTranslationSpeed = m_ZoomLevel;
 	}
+
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);

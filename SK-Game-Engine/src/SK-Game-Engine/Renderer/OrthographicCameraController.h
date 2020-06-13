@@ -14,7 +14,8 @@ namespace SK_Game_Engine
 		void OnEvent(Event& e);
 		inline OrthographicCamera& GetCamera() { return m_Camera; };
 		inline const OrthographicCamera& GetCamera() const { return m_Camera; };
-
+		inline void SetZoomLevel(float level) { m_ZoomLevel = level;}
+		inline float GetZoomLevel() { return m_ZoomLevel; }
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);

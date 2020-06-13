@@ -152,8 +152,6 @@ public:
 		m_CameraController.OnEvent(event);
 	}
 
-
-
 	void OnImGuiRender() override
 	{
 		ImGui::Begin("Settings");
@@ -161,6 +159,7 @@ public:
 		ImGui::End();
 
 	}
+
 private:
 	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_Shader;
 	SK_Game_Engine::Ref<SK_Game_Engine::Shader> m_SquareShader;

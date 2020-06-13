@@ -24,12 +24,14 @@ namespace SK_Game_Engine {
 		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 		static Application* s_Instance;
 		Ref<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
-		bool m_Running = true;
+		bool m_Running;
 		LayerStack m_LayerStack;
 		float m_LastFrameTime;
+		bool m_Minimized;
 	};
 
 	Application* CreateApplication();
