@@ -9,7 +9,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
-#include "SK-Game-Engine/Log.h"
+#include "SK-Game-Engine/Core/Log.h"
 
 #ifdef SKGE_PLATFORM_WINDOWS
 #include <Windows.h>

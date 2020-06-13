@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "OpenGLShader.h"
-#include "SK-Game-Engine/Core.h"
+#include "SK-Game-Engine/Core/Core.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 

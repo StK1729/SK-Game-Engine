@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Log.h"
 #include "Input.h"
-#include "Renderer/Renderer.h"
+#include "SK-Game-Engine/Renderer/Renderer.h"
 #include <GLFW/glfw3.h> // temporary until platform is configured.
 
 namespace SK_Game_Engine {

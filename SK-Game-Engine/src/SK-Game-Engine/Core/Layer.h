@@ -1,7 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "SK-Game-Engine/Events/Event.h"
-#include "Core/TimeStep.h"
+#include "SK-Game-Engine/Core/TimeStep.h"
 
 namespace SK_Game_Engine {
 	class SKGE_API Layer

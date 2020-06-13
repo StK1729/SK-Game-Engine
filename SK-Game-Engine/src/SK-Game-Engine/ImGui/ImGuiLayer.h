@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "SK-Game-Engine/Layer.h"
+#include "SK-Game-Engine/Core/Layer.h"
 #include "SK-Game-Engine/Events/MouseEvents.h"
 #include "SK-Game-Engine/Events/KeyEvents.h"
-#include "SK-Game-Engine/KeyCodes.h"
+#include "SK-Game-Engine/Core/KeyCodes.h"
 
 namespace SK_Game_Engine
 {

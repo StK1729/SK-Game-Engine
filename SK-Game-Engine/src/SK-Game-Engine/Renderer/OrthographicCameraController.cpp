@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "OrthographicCameraController.h"
-#include <SK-Game-Engine\KeyCodes.h>
-#include <SK-Game-Engine\Input.h>
+#include "SK-Game-Engine/Core/KeyCodes.h"
+#include "SK-Game-Engine/Core/Input.h"
 
 namespace SK_Game_Engine
 {
@@ -15,8 +15,8 @@ namespace SK_Game_Engine
 		, m_Camera{ -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel }
 		, m_Rotation{ rotation }
 	{
-
 	}
+
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
 		float timeInSeconds = ts.GetSeconds();
@@ -45,7 +45,7 @@ namespace SK_Game_Engine
 		}
 
 		m_Camera.SetPosition(m_CameraPosition);
-		m_CameraTranslationSpeed = m_ZoomLevel;
+		m_CameraTranslationSpeed = 5 * m_ZoomLevel;
 	}
 
 	void OrthographicCameraController::OnEvent(Event& e)
@@ -57,7 +57,7 @@ namespace SK_Game_Engine
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
-		m_ZoomLevel -= e.GetYOffset();
+		m_ZoomLevel -= (float)e.GetYOffset();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
 		return false;

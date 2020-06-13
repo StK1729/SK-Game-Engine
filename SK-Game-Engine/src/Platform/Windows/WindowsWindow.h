@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SK-Game-Engine/Window.h"
+#include "SK-Game-Engine/Core/Window.h"
 #include "SK-Game-Engine/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 

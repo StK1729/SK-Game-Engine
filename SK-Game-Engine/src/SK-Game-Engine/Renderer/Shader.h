@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "SK-Game-Engine/Core.h"
+#include "SK-Game-Engine/Core/Core.h"
 #include <glm/glm.hpp>
 
 namespace SK_Game_Engine {

@@ -3,9 +3,9 @@
 #include "Core.h"
 #include "Window.h"
 #include "LayerStack.h"
-#include "Events/ApplicationEvents.h"
-#include "ImGui/ImGuiLayer.h"
-#include "Core/TimeStep.h"
+#include "SK-Game-Engine/Events/ApplicationEvents.h"
+#include "SK-Game-Engine/ImGui/ImGuiLayer.h"
+#include "SK-Game-Engine/Core/TimeStep.h"
 
 
 namespace SK_Game_Engine {

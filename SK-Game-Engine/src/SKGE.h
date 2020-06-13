@@ -1,14 +1,14 @@
 #pragma once
 
-#include "SK-Game-Engine/Application.h"
-#include "SK-Game-Engine/Log.h"
-#include "SK-Game-Engine/Layer.h"
+#include "SK-Game-Engine/Core/Application.h"
+#include "SK-Game-Engine/Core/Log.h"
+#include "SK-Game-Engine/Core/Layer.h"
 
 #include "SK-Game-Engine/Core/TimeStep.h"
 
-#include "SK-Game-Engine/Input.h"
-#include "SK-Game-Engine/MouseButtonCodes.h"
-#include "SK-Game-Engine/KeyCodes.h"
+#include "SK-Game-Engine/Core/Input.h"
+#include "SK-Game-Engine/Core/MouseButtonCodes.h"
+#include "SK-Game-Engine/Core/KeyCodes.h"
 
 /* ------------------ Renderer  ------------------ */
 #include "SK-Game-Engine/Renderer/Renderer.h"
@@ -23,4 +23,4 @@
 
 /* ----------------- Entry Point ----------------- */
 
-#include "SK-Game-Engine/EntryPoint.h"
+#include "SK-Game-Engine/Core/EntryPoint.h"

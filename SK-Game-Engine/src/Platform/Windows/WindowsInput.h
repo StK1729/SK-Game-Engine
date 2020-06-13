@@ -1,5 +1,5 @@
 #pragma once
-#include "SK-Game-Engine/Input.h"
+#include "SK-Game-Engine/Core/Input.h"
 
 namespace SK_Game_Engine
 {

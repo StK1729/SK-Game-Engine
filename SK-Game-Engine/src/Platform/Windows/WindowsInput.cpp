@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "WindowsInput.h"
 #include <GLFW/glfw3.h>
-#include "SK-Game-Engine/Application.h"
+#include "SK-Game-Engine/Core/Application.h"
 
 namespace SK_Game_Engine {
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
-#include "SK-Game-Engine/Core.h"
+#include "Core.h"
 #include "SK-Game-Engine/Events/Event.h"
 
 namespace SK_Game_Engine

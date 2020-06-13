@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "SK-Game-Engine/Core.h"
+#include "SK-Game-Engine/Core/Core.h"
 #include "Buffer.h"
 
 namespace SK_Game_Engine
