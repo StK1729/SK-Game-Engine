@@ -1,12 +1,12 @@
 #include <SKGE.h>
-#include "SK-Game-Engine/Core/Core.h"
-
+#include <SK-Game-Engine/Core/EntryPoint.h>
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include "imgui.h"
+#include <glm/gtc/type_ptr.hpp>
+#include "Sandbox2D.h"
 
 
 class ExampleLayer : public SK_Game_Engine::Layer
@@ -71,8 +71,8 @@ public:
 		// m_Shader = SK_Game_Engine::Ref<SK_Game_Engine::Shader>(SK_Game_Engine::Shader::Create(vertexSrc, fragmentSrc));
 		m_ShaderLibrary->Load("assets/shaders/TextureShaders.glsl");
 		m_SquareShader = SK_Game_Engine::Shader::Create("SquareVertexShader", squareVertexSrc, squareFragmentSrc);
-		m_VertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
-		m_SquareVertexArray = SK_Game_Engine::Ref<SK_Game_Engine::VertexArray>(SK_Game_Engine::VertexArray::Create());
+		m_VertexArray = SK_Game_Engine::VertexArray::Create();
+		m_SquareVertexArray = SK_Game_Engine::VertexArray::Create();
 		float vertices[] =
 		{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -186,7 +186,8 @@ class Sandbox : public SK_Game_Engine::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		// PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox()

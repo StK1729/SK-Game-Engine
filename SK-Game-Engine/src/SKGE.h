@@ -21,6 +21,6 @@
 
 #include "SK-Game-Engine/Renderer/OrthographicCameraController.h"
 
-/* ----------------- Entry Point ----------------- */
+/* -------------------- Core  -------------------- */
 
-#include "SK-Game-Engine/Core/EntryPoint.h"
+#include "SK-Game-Engine/Core/Core.h"

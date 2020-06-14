@@ -5,7 +5,7 @@
 
 namespace SK_Game_Engine
 {
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		RendererAPI::API rendererApi = Renderer::GetRendererAPI();
 		switch (rendererApi) {
@@ -16,7 +16,7 @@ namespace SK_Game_Engine
 			}
 			case RendererAPI::API::OpenGL:
 			{
-				return new OpenGLVertexArray();
+				return std::make_shared<OpenGLVertexArray>();
 			}
 			default:
 			{
