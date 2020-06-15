@@ -16,13 +16,13 @@ namespace SK_Game_Engine
 		void Bind() const override;
 		void Unbind() const override;
 
-		void UploadUniformMat3(const std::string& name, const glm::mat3& matrix) override;
-		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix) override;
-		void UploadUniformInt(const std::string& name, int value) override;
-		void UploadUniformFloat(const std::string& name, float value) override;
-		void UploadUniformFloat2(const std::string& name, const glm::vec2& vector) override;
-		void UploadUniformFloat3(const std::string& name, const glm::vec3& vector) override;
-		void UploadUniformFloat4(const std::string& name, const glm::vec4& vector) override;
+		void SetMat3(const std::string& name, const glm::mat3& matrix) override;
+		void SetMat4(const std::string& name, const glm::mat4& matrix) override;
+		void SetInt(const std::string& name, int value) override;
+		void SetFloat(const std::string& name, float value) override;
+		void SetFloat2(const std::string& name, const glm::vec2& vector) override;
+		void SetFloat3(const std::string& name, const glm::vec3& vector) override;
+		void SetFloat4(const std::string& name, const glm::vec4& vector) override;
 		inline const std::string& GetName() const override { return m_Name; };
 		inline void SetName(const std::string& name) override { m_Name = name; };
 	private:

@@ -102,43 +102,43 @@ namespace SK_Game_Engine
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
+	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
+	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform1i(location, value);
 	}
 
-	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
+	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform1f(location, value);
 	}
 
-	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& vector)
+	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& vector)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform2f(location, vector.x, vector.y);
 	}
 
-	void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& vector)
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& vector)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform3f(location, vector.x, vector.y, vector.z);
 	}
 
-	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& vector)
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& vector)
 	{
 		int location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform4f(location, vector.x, vector.y, vector.z, vector.w);

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "Renderer2D.h"
 
 namespace SK_Game_Engine
 {
@@ -10,6 +11,7 @@ namespace SK_Game_Engine
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
@@ -29,8 +31,8 @@ namespace SK_Game_Engine
 	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjectionMatrix", s_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_TransformationMatrix", transform);
+		shader->SetMat4("u_ViewProjectionMatrix", s_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_TransformationMatrix", transform);
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}

@@ -12,6 +12,7 @@
 
 /* ------------------ Renderer  ------------------ */
 #include "SK-Game-Engine/Renderer/Renderer.h"
+#include "SK-Game-Engine/Renderer/Renderer2D.h"
 #include "SK-Game-Engine/Renderer/RenderCommand.h"
 
 #include "SK-Game-Engine/Renderer/Buffer.h"

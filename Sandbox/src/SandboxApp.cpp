@@ -118,7 +118,7 @@ public:
 
 		auto textureShader = m_ShaderLibrary->Get("TextureShaders");
 		textureShader->Bind();
-		textureShader->UploadUniformInt("u_Texture", 0);
+		textureShader->SetInt("u_Texture", 0);
 	}
 
 	void OnUpdate(const SK_Game_Engine::Timestep& timestep) override
@@ -130,7 +130,7 @@ public:
 		SK_Game_Engine::Renderer::BeginScene(m_CameraController.GetCamera());
 		static glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.1f));
 		m_SquareShader->Bind();
-		m_SquareShader->UploadUniformFloat4("u_Color", m_Color);
+		m_SquareShader->SetFloat4("u_Color", m_Color);
 		for (int j = 0; j < 20; ++j) {
 			for (int i = 0; i < 20; ++i) {
 				glm::vec3 position{ -1.65f + i * 0.11f, 0.8f - j * 0.11f, 0.0f };

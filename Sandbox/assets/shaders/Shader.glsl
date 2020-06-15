@@ -14,10 +14,11 @@ void main()
 
 #type fragment
 #version 450 core
-layout(location = 0) out vec4 v_Color;
+layout(location = 0) out vec4 color;
 in vec2 o_TexCoord;
+uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 void main()
 {
-	v_Color = texture(u_Texture, o_TexCoord);
+	color = texture(u_Texture, o_TexCoord)*u_Color;
 }
