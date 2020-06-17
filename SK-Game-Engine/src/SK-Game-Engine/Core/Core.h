@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-
+#include <string>
 
 #ifdef SKGE_PLATFORM_WINDOWS
 	#ifdef DLL
@@ -28,6 +28,15 @@
 #endif
 
 #define SKGE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#define CONCATENATE(x, y) x ## y
+#define CONCAT(x, y) CONCATENATE(x, y)
+
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#endif
+
+// #define SKGE_PROFILING
 
 namespace SK_Game_Engine
 {

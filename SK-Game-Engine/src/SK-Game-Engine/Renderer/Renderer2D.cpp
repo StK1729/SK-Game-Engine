@@ -7,7 +7,7 @@
 
 namespace SK_Game_Engine
 {
-	static struct Renderer2DStorage
+	struct Renderer2DStorage
 	{
 		Ref<VertexArray> VertexArray;
 		Ref<ShaderLibrary> ShaderLibrary;

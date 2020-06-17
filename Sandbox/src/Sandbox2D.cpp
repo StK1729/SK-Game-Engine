@@ -2,7 +2,6 @@
 #include "imgui.h"
 #include <glm/gtc/type_ptr.hpp>
 
-
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D")
 	, m_CameraController{ 1280.0f / 720.0f }
@@ -22,6 +21,7 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(const SK_Game_Engine::Timestep& ts)
 {
+	SKGE_PROFILING_FUNCTION();
 	m_CameraController.OnUpdate(ts);
 	SK_Game_Engine::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 	SK_Game_Engine::RenderCommand::Clear();
@@ -40,6 +40,7 @@ void Sandbox2D::OnUpdate(const SK_Game_Engine::Timestep& ts)
 
 void Sandbox2D::OnImGuiRender()
 {
+	SKGE_PROFILING_FUNCTION();
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Color", glm::value_ptr(m_Color));
 	ImGui::End();

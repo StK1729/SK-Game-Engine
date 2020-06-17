@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "SK-Game-Engine/Core/Log.h"
+#include "SK-Game-Engine/Debug/Profiler.h"
 
 #ifdef SKGE_PLATFORM_WINDOWS
 #include <Windows.h>
