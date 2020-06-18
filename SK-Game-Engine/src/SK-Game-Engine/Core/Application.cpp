@@ -34,18 +34,24 @@ namespace SK_Game_Engine {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
@@ -67,6 +73,8 @@ namespace SK_Game_Engine {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
 			m_Minimized = true;
 			return false;
@@ -80,21 +88,33 @@ namespace SK_Game_Engine {
 
 	void Application::Run()
 	{
-		auto [x, y] = Input::GetMouseCursorPos();
+		SKGE_PROFILING_FUNCTION();
+
 		while (m_Running)
 		{
+			SKGE_PROFILING_SCOPE("Run Loop");
 			float time = (float)glfwGetTime();
 			Timestep timestep{ time - m_LastFrameTime };
 			m_LastFrameTime = time;
 
 			if (!m_Minimized) {
-				for (Layer* layer : m_LayerStack) {
-					layer->OnUpdate(timestep);
+				
+				{
+					SKGE_PROFILING_SCOPE("SK_Game_Engine::LayerStack::OnUpdate()");
+
+					for (Layer* layer : m_LayerStack) {
+						layer->OnUpdate(timestep);
+					}
 				}
 
 				m_ImGuiLayer->Begin();
-				for (Layer* layer : m_LayerStack) {
-					layer->OnImGuiRender();
+
+				{
+					SKGE_PROFILING_SCOPE("SK_Game_Engine::LayerStack::OnImGuiRender");
+
+					for (Layer* layer : m_LayerStack) {
+						layer->OnImGuiRender();
+					}
 				}
 				m_ImGuiLayer->End();
 			}

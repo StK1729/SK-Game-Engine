@@ -29,6 +29,8 @@ namespace SK_Game_Engine
 
 	void ImGuiLayer::Begin()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -36,6 +38,8 @@ namespace SK_Game_Engine
 
 	void ImGuiLayer::End()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		ImGuiIO& io = ImGui::GetIO();
 		Window& window = Application::Get().GetWindow();
 		io.DisplaySize = ImVec2(static_cast<float>(window.GetWidth()), static_cast<float>(window.GetHeight()));
@@ -53,6 +57,8 @@ namespace SK_Game_Engine
 
 	void ImGuiLayer::OnAttach()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 
@@ -77,6 +83,8 @@ namespace SK_Game_Engine
 
 	void ImGuiLayer::OnDetach()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();

@@ -125,6 +125,7 @@ namespace SK_Game_Engine
 
 }
 
+// #define SKGE_PROFILING
 
 #ifdef SKGE_PROFILING
 	#define SKGE_PROFILING_BEGIN_SESSION(name, filepath) ::SK_Game_Engine::Profiler::Get().BeginSession(name, filepath)
@@ -134,6 +135,6 @@ namespace SK_Game_Engine
 #else
 	#define SKGE_PROFILING_BEGIN_SESSION(name, filepath)
 	#define SKGE_PROFILING_END_SESSION()
-	#define SKGE_PROFILING_SCOPE()
+	#define SKGE_PROFILING_SCOPE(name)
 	#define SKGE_PROFILING_FUNCTION()
 #endif

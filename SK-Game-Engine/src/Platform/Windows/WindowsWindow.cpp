@@ -33,6 +33,8 @@ namespace SK_Game_Engine
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -139,17 +141,23 @@ namespace SK_Game_Engine
 
 	void WindowsWindow::Shutdown()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glfwDestroyWindow(m_Window);
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 	
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		if (enabled){
 			glfwSwapInterval(1);
 		}

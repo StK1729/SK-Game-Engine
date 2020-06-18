@@ -12,6 +12,8 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	SKGE_PROFILING_FUNCTION();
+
 	m_Texture = SK_Game_Engine::Texture2D::Create("assets/textures/ChernoCheckerboard.png");
 }
 
@@ -22,6 +24,7 @@ void Sandbox2D::OnDetach()
 void Sandbox2D::OnUpdate(const SK_Game_Engine::Timestep& ts)
 {
 	SKGE_PROFILING_FUNCTION();
+
 	m_CameraController.OnUpdate(ts);
 	SK_Game_Engine::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 	SK_Game_Engine::RenderCommand::Clear();

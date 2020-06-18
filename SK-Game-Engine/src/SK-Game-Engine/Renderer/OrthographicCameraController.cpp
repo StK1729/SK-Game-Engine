@@ -19,6 +19,8 @@ namespace SK_Game_Engine
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		float timeInSeconds = ts.GetSeconds();
 		if (Input::IsKeyPressed(SKGE_KEY_A) || Input::IsKeyPressed(SKGE_KEY_LEFT)) {
 			m_CameraPosition.x -= m_CameraTranslationSpeed * timeInSeconds;
@@ -50,6 +52,8 @@ namespace SK_Game_Engine
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(SKGE_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(SKGE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
@@ -57,6 +61,8 @@ namespace SK_Game_Engine
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_ZoomLevel -= (float)e.GetYOffset();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
@@ -65,7 +71,10 @@ namespace SK_Game_Engine
 
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_AspectRatio = (float)e.GetWidth() / e.GetHeight();
+		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;
 	}
 }

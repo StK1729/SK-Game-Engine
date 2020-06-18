@@ -8,9 +8,15 @@ namespace SK_Game_Engine
 	OpenGLTexture::OpenGLTexture(const std::string& path) 
 		: m_Path {path}
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(true);
-		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		stbi_uc* data;
+		{
+			SKGE_PROFILING_SCOPE("OpenGLTexture::OpenGLTexture(const std::string & path) stbi_load");
+			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		}
 		SKGE_CORE_ASSERT(data, "Failed to load image!");
 		m_Width = width;
 		m_Height = height;
@@ -45,6 +51,8 @@ namespace SK_Game_Engine
 		: m_Width {width}
 		, m_Height {height}
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_InternalFormat = GL_RGBA8;
 		m_DataFormat = GL_RGBA;
 		
@@ -61,11 +69,15 @@ namespace SK_Game_Engine
 
 	OpenGLTexture::~OpenGLTexture()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glDeleteTextures(1, &m_RendererId);
 	}
 
 	void OpenGLTexture::SetData(void* data, uint32_t size)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		uint32_t bpc = m_DataFormat == GL_RGBA ? 4 : 3;
 		SKGE_CORE_ASSERT(size == bpc * m_Width * m_Height, "Invalid size!");
 		glTextureSubImage2D(m_RendererId, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
@@ -73,6 +85,8 @@ namespace SK_Game_Engine
 
 	void OpenGLTexture::Bind(uint32_t slot) const
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glBindTextureUnit(0, m_RendererId);
 	}
 }

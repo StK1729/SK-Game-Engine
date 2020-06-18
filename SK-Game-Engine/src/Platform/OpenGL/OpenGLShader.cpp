@@ -21,6 +21,8 @@ namespace SK_Game_Engine
 	// This is just temporary until the proper file system is built. This clearly violates Separation of Concerns.
 	static std::string ReadFile(const std::string& filepath)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in) {
@@ -39,6 +41,8 @@ namespace SK_Game_Engine
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 		const char* typeToken = "#type";
 		size_t typeTokenLength = strlen(typeToken);
@@ -60,6 +64,8 @@ namespace SK_Game_Engine
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 		: m_RendererId{ 0 }
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		m_Name = name;
 		std::unordered_map<GLenum, std::string> shaderSources{ {GL_VERTEX_SHADER, vertexSource}, {GL_FRAGMENT_SHADER, fragmentSource } };
 		Compile(shaderSources);
@@ -68,6 +74,8 @@ namespace SK_Game_Engine
 	OpenGLShader::OpenGLShader(const std::string& filepath)
 		: m_RendererId{ 0 }
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		std::string shaderSource = ReadFile(filepath);
 		std::unordered_map<GLenum, std::string> shaderSources = PreProcess(shaderSource);
 		Compile(shaderSources);
@@ -81,6 +89,8 @@ namespace SK_Game_Engine
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& filepath)
 		: m_RendererId{ 0 }
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		std::string shaderSource = ReadFile(filepath);
 		std::unordered_map<GLenum, std::string> shaderSources = PreProcess(shaderSource);
 		Compile(shaderSources);
@@ -89,16 +99,22 @@ namespace SK_Game_Engine
 
 	OpenGLShader::~OpenGLShader()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glDeleteProgram(m_RendererId);
 	}
 
 	void OpenGLShader::Bind() const
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glUseProgram(m_RendererId);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glUseProgram(0);
 	}
 
@@ -146,6 +162,8 @@ namespace SK_Game_Engine
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		std::vector<GLuint> shaderIds;
 		shaderIds.reserve(shaderSources.size());
 		uint32_t program = glCreateProgram();

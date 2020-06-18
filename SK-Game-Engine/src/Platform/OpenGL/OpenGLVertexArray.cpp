@@ -41,21 +41,28 @@ namespace SK_Game_Engine
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glCreateVertexArrays(1, &m_RendererId);
-		glBindVertexArray(m_RendererId);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glDeleteVertexArrays(1, &m_RendererId);
 	}
 
 	void OpenGLVertexArray::Bind()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glBindVertexArray(m_RendererId);
 	}
 	void OpenGLVertexArray::Unbind()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		glBindVertexArray(0);
 	}
 	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)

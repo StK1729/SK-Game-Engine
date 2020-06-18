@@ -18,6 +18,8 @@ namespace SK_Game_Engine
 
 	void Renderer2D::Init()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		storage = std::make_unique<Renderer2DStorage>();
 		storage->VertexArray = VertexArray::Create();
 		storage->ShaderLibrary = std::make_unique<ShaderLibrary>();
@@ -54,11 +56,15 @@ namespace SK_Game_Engine
 
 	void Renderer2D::Shutdown()
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		storage.release();
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
 		shader->Bind();
 		shader->SetMat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
@@ -75,6 +81,8 @@ namespace SK_Game_Engine
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
 		shader->SetFloat4("u_Color", color);
 		storage->WhiteTexture->Bind();
@@ -92,6 +100,8 @@ namespace SK_Game_Engine
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
+		SKGE_PROFILING_FUNCTION();
+
 		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
 		shader->SetFloat4("u_Color", glm::vec4(1.0f));
 		texture->Bind();
