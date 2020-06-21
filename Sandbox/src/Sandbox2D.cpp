@@ -36,7 +36,7 @@ void Sandbox2D::OnUpdate(const SK_Game_Engine::Timestep& ts)
 		}
 	}
 
-	SK_Game_Engine::Renderer2D::DrawQuad({0.5f, 0.5f}, { 5.0f, 5.0f }, m_Texture);
+	SK_Game_Engine::Renderer2D::DrawRotatedQuad({ 0.5f, 0.5f }, { 5.0f, 5.0f }, glm::radians(45.0f), m_Texture, 10.0f);
 
 	SK_Game_Engine::Renderer2D::EndScene();
 }

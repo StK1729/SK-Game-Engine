@@ -85,6 +85,7 @@ namespace SK_Game_Engine
 
 		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
 		shader->SetFloat4("u_Color", color);
+		shader->SetFloat("u_TilingFactor", 1.0f);
 		storage->WhiteTexture->Bind();
 		glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(size.x, size.y, 1.0f));
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * scale;
@@ -93,20 +94,66 @@ namespace SK_Game_Engine
 		RenderCommand::DrawIndexed(storage->VertexArray);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
-		DrawQuad({ position.x, position.y, 0 }, size, texture);
+		DrawQuad({ position.x, position.y, 0 }, size, texture, tilingFactor, tintColor);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
 		SKGE_PROFILING_FUNCTION();
 
 		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
-		shader->SetFloat4("u_Color", glm::vec4(1.0f));
+		shader->SetFloat4("u_Color", tintColor);
+		shader->SetFloat("u_TilingFactor", tilingFactor);
 		texture->Bind();
+		glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
 		glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(size.x, size.y, 1.0f));
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * scale;
+		glm::mat4 transform = translation * scale;
+		texture->Bind();
+		shader->SetMat4("u_TransformationMatrix", transform);
+		storage->VertexArray->Bind();
+		RenderCommand::DrawIndexed(storage->VertexArray);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotationAngle, const glm::vec4& color)
+	{
+		DrawRotatedQuad({ position.x, position.y, 0.0f }, size, rotationAngle, color);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotationAngle, const glm::vec4& color)
+	{
+		SKGE_PROFILING_FUNCTION();
+
+		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
+		shader->SetFloat4("u_Color", color);
+		shader->SetFloat("u_TilingFactor", 1.0f);
+		storage->WhiteTexture->Bind();
+		glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), rotationAngle, { 0.0f, 0.0f, 1.0f });
+		glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(size.x, size.y, 1.0f));
+		glm::mat4 transform = translation * rotation * scale;
+		shader->SetMat4("u_TransformationMatrix", transform);
+		storage->VertexArray->Bind();
+		RenderCommand::DrawIndexed(storage->VertexArray);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotationAngle, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
+	{
+		DrawRotatedQuad({position.x, position.y, 0.0f}, size, rotationAngle, texture, tilingFactor, tintColor);
+	}
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotationAngle, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
+	{
+		SKGE_PROFILING_FUNCTION();
+
+		Ref<Shader> shader = storage->ShaderLibrary->Get("Shader");
+		shader->SetFloat4("u_Color", tintColor);
+		shader->SetFloat("u_TilingFactor", tilingFactor);
+		texture->Bind();
+		glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), rotationAngle, { 0.0f, 0.0f, 1.0f });
+		glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(size.x, size.y, 1.0f));
+		glm::mat4 transform = translation * rotation * scale;
 		texture->Bind();
 		shader->SetMat4("u_TransformationMatrix", transform);
 		storage->VertexArray->Bind();
